@@ -6,7 +6,7 @@ export default {
 
     async execute(client) {
         const webhook = new WebhookClient({
-            url: "https://discord.com/api/webhooks/1254025359079247996/uUG9uQ9xwHdEa2Xu5SPg7BOpqfaRniT91PNyrYzxyoR7CM5GidnZifK1iue4FDOHHnVZ"
+            url: process.env.GUILDJOIN
         });
 
         //console.log(client);

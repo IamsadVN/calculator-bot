@@ -6,7 +6,7 @@ export default {
 
     async execute(client) {
         const webhook = new WebhookClient({
-            url: "https://discord.com/api/webhooks/1254009947298074714/Kq7hA0LTijG2TnboLeJdCBJhgdkl-p43VvyZibGmOQV9MKBdP42cf1UFErieIh2HBy1g",
+            url: process.env.WEBHOOK_GUILDLEFT,
         });
 
         const dateJoin = new Date(client.guild.joinedTimestamp);

@@ -10,7 +10,7 @@ export default {
         console.error(client);
 
         const webhook = new WebhookClient({
-            url: 'https://discord.com/api/webhooks/1180690605274300489/jCTCcegKmrbGmWBICAKrlr0YkimWbgEqz5DgKeXBPmjYSRdpGSMbVAxTdMmHTw5mMGmO'
+            url: process.env.WEBHOOK_ERROR
         });
 
         const embed = {
