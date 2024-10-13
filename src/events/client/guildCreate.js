@@ -6,7 +6,7 @@ export default {
 
     async execute(client) {
         const webhook = new WebhookClient({
-            url: process.env.GUILDJOIN
+            url: process.env.WEBHOOK_GUILDJOIN
         });
 
         //console.log(client);
