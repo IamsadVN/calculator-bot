@@ -18,13 +18,12 @@ export default {
             .split(/ +/g);
 
         //console.log(splitted);
-        const command = 
-        message.client.commands.get(name.toLowerCase()) ||
-        message.client.commands.find((cmd) => cmd.aliases?.includes(name.toLowerCase()));
+        const command = message.client.commands.get(name.toLowerCase()) ||
+                        message.client.commands.find((cmd) => cmd.aliases?.includes(name.toLowerCase()));
 
         if (!command) return;
-        const user = message.author.username;
         await command.executeMessage?.(message,args);
-        commandLog(user,command.name,"Prefix");
+        
+        commandLog(`${message.guild} / ${message.author.username}`,command.name,"Prefix");
     }
 }

@@ -28,7 +28,7 @@ export default {
                     inline: true
                 },
                 {
-                    name: "Lantency:",
+                    name: "Latency:",
                     value: `${codeBlock(`${message.client.ws.ping}ms`)}`,
                     inline: true
                 }

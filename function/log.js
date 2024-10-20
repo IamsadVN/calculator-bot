@@ -17,5 +17,5 @@ export function warnLog(valueWarn) {
 }
 
 export function commandLog(userUseCommand,valueCommand,type) {
-    console.log(`${chalk.blue(date_full)} ${chalk.whiteBright(`[CMD]`)} ${chalk.gray(`User: ${userUseCommand} | Command: ${valueCommand} | Type: ${type}`)}`);
+    console.log(`${chalk.blue(date_full)} ${chalk.whiteBright(`[CMD]`)} ${chalk.gray(`From: ${userUseCommand} | Command: ${valueCommand} | Type: ${type}`)}`);
 }

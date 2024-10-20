@@ -1,5 +1,4 @@
 import langOfEachGuild from "../../../schemas/LangOfGuild.js";
-import { SlashCommandBuilder } from "discord.js";
 
 export default {
     name: 'language',

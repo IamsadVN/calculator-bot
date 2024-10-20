@@ -154,8 +154,8 @@ function getValueOfEquation(equation) {
     if(!matched) return "error";
 
     return {
-        coefficient_1: matched[1]||1,
-        coefficient_2: `${matched[3]}${matched[4]||1}`,
+        coefficient_1: matched[1] || 1,
+        coefficient_2: `${matched[3]}${matched[4] || 1}`,
         variable_1: matched[2],
         variable_2: matched[5]
     };

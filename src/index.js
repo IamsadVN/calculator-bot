@@ -14,6 +14,7 @@ import mongoose from "mongoose";
 
 config();
 
+//Client Gateway
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
@@ -25,10 +26,13 @@ const client = new Client({
 
 client.commands = new Collection();
 
+//Loader
 await loadEvents(client);
 await loadCommands(client);
 
+//Database
 await mongoose.connect(process.env.MONGO_DB);
 infoLog("MongoDB has connected");
 
+//Bot Login 
 client.login(process.env.BOT_TOKEN);

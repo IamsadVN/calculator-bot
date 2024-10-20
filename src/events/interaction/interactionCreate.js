@@ -13,7 +13,7 @@ export default {
         if (interaction.isChatInputCommand()) {
             if (!command) return;
             await command.executeChatInput?.(interaction);
-            commandLog(interaction.user.tag,command.name,"Slash Command");
+            commandLog(`${interaction.guild} / ${interaction.user.tag}`,command.name,"Slash Command");
         }
         else if (interaction.isAutocomplete()) 
             await command.autocomplete(interaction);
