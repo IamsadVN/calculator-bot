@@ -37,19 +37,19 @@ export default {
     description: "Chuyển ký tự thành nhị phân",
     aliases: ["t2b"],
 
-    async executeMessage(message,args) {
+    async executeMessage(message,args,i18next) {
         const inputText = args.join(" ");
 
         const embed = {
             color: 0x3399ff,
-            title: "Text To Binary",
+            title: i18next.t("textToBinary.title"),
             fields: [
                 {
-                    name: "Text:",
+                    name: i18next.t("textToBinary.fields.textInput"),
                     value: codeBlock(inputText)
                 },
                 {
-                    name: "Result:",
+                    name: i18next.t("textToBinary.fields.resultOutput"),
                     value: codeBlock(textToBinary(inputText))
                 }
             ],
@@ -65,19 +65,19 @@ export default {
         })
     },
 
-    async executeChatInput(interaction) {
+    async executeChatInput(interaction,i18next) {
         const inputText = interaction.options.getString("input");
 
         const embed = {
             color: 0x3399ff,
-            title: "Text To Binary",
+            title: i18next.t("textToBinary.title"),
             fields: [
                 {
-                    name: "Text:",
+                    name: i18next.t("textToBinary.fields.textInput"),
                     value: codeBlock(inputText)
                 },
                 {
-                    name: "Result:",
+                    name: i18next.t("textToBinary.fields.resultOutput"),
                     value: codeBlock(textToBinary(inputText))
                 }
             ],

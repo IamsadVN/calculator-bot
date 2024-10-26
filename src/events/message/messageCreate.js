@@ -1,4 +1,6 @@
+import { getLang } from "../../../function/getLang.js";
 import { commandLog } from "../../../function/log.js";
+import i18next from "i18next";
 
 export default {
     name: "messageCreate",
@@ -22,7 +24,10 @@ export default {
                         message.client.commands.find((cmd) => cmd.aliases?.includes(name.toLowerCase()));
 
         if (!command) return;
-        await command.executeMessage?.(message,args);
+        
+        i18next.changeLanguage(await getLang(message.guild.id));
+
+        await command.executeMessage?.(message,args,i18next);
         
         commandLog(`${message.guild} / ${message.author.username}`,command.name,"Prefix");
     }

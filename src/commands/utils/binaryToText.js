@@ -9,19 +9,19 @@ export default {
     aliases: ["b2t"],
     description: "Converts a binary string to a text",
 
-    async executeMessage(message,args) {
+    async executeMessage(message,args,i18next) {
         const binaryString = args.join(" ");
 
         const embed = {
             color: 0x3399ff,
-            title: "Binary To Text",
+            title: i18next.t("binaryToText.title"),
             fields: [
                 {
-                    name: "Binary:",
+                    name: i18next.t("binaryToText.fields.binaryInput"),
                     value: codeBlock(binaryString)
                 },
                 {
-                    name: "Kết quả:",
+                    name: i18next.t("binaryToText.fields.binaryOutput"),
                     value: codeBlock(bitToText(binaryString))
                 }
             ],
@@ -37,19 +37,19 @@ export default {
         });
     },
 
-    async executeChatInput(interaction) {
+    async executeChatInput(interaction,i18next) {
         const binaryString = interaction.options.getString("input");
 
         const embed = {
             color: 0x3399ff,
-            title: "Binary To Text",
+            title: i18next.t("binaryToText.title"),
             fields: [
                 {
-                    name: "Binary:",
+                    name: i18next.t("binaryToText.fields.binaryInput"),
                     value: codeBlock(binaryString)
                 },
                 {
-                    name: "Kết quả:",
+                    name: i18next.t("binaryToText.fields.resultOutput"),
                     value: codeBlock(bitToText(binaryString))
                 }
             ],

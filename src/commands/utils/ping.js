@@ -14,7 +14,7 @@ export default {
     description: "Kiểm tra tốc độ phản hồi của Casio fx-580VN X",
 
 
-    async executeMessage(message) {
+    async executeMessage(message,i18next) {
         const embed = {
             color: 0x3399ff,
             author: {
@@ -23,19 +23,19 @@ export default {
             },
             fields: [
                 {
-                    name: "Uptime:",
-                    value: `${codeBlock(`[${calculateTime(Math.round(process.uptime()))}]`)}`,
+                    name: i18next.t("ping.fields.uptime"),
+                    value: codeBlock(`[${calculateTime(Math.round(process.uptime()))}]`),
                     inline: true
                 },
                 {
-                    name: "Latency:",
-                    value: `${codeBlock(`${message.client.ws.ping}ms`)}`,
+                    name: i18next.t("ping.fields.latency"),
+                    value: codeBlock(`${message.client.ws.ping}ms`),
                     inline: true
                 }
             ],
             footer: {
-                text: `${message.author.username}`,
-                icon_url: `${message.author.displayAvatarURL({size: 64})}`
+                text: message.author.username,
+                icon_url: message.author.displayAvatarURL({size: 64})
             },
             timestamp: new Date().toISOString()
         }
@@ -45,7 +45,7 @@ export default {
         });
     },
 
-    async executeChatInput(interaction) {
+    async executeChatInput(interaction,i18next) {
         //console.log(interaction.client);
         const embed = {
             color: 0x3399ff,
@@ -55,19 +55,19 @@ export default {
             },
             fields: [
                 {
-                    name: "Uptime:",
-                    value: `${codeBlock(`[${calculateTime(Math.round(process.uptime()))}]`)}`,
+                    name: i18next.t("ping.fields.uptime"),
+                    value: codeBlock(`[${calculateTime(Math.round(process.uptime()))}]`),
                     inline: true
                 },
                 {
-                    name: "Lantency:",
-                    value: `${codeBlock(`${interaction.client.ws.ping}ms`)}`,
+                    name: i18next.t("ping.fields.latency"),
+                    value: codeBlock(`${interaction.client.ws.ping}ms`),
                     inline: true
                 }
             ],
             footer: {
-                text: `${interaction.user.tag}`,
-                icon_url: `${interaction.user.displayAvatarURL({size: 64})}`
+                text: interaction.user.tag,
+                icon_url: interaction.user.displayAvatarURL({size: 64})
             },
             timestamp: new Date().toISOString()
         }

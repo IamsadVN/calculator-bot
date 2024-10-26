@@ -14,19 +14,19 @@ export default {
     aliases: ["n2b"],
     description: "Converts a number to binary",
 
-    async executeMessage(message,args) {
+    async executeMessage(message,args,i18next) {
         const number = Number(args[0]);
 
         const embed = {
             color: 0x3399ff,
-            title: "Binary Generator",
+            title: i18next.t("numberToBinary.title"),
             fields: [
                 {
-                    name: "Số:",
+                    name: i18next.t("numberToBinary.fields.numberInput"),
                     value: codeBlock(number)
                 },
                 {
-                    name: "Kết quả:",
+                    name: i18next.t("numberToBinary.fields.resultOutput"),
                     value: codeBlock(numToBin(number))
                 }
             ],
@@ -42,19 +42,19 @@ export default {
         })
     },
 
-    async executeChatInput(interaction) {
+    async executeChatInput(interaction,i18next) {
         const number = interaction.options.getNumber("number");
 
         const embed = {
             color: 0x3399ff,
-            title: "Binary Generator",
+            title: i18next.t("numberToBinary.title"),
             fields: [
                 {
-                    name: "Số:",
+                    name: i18next.t("numberToBinary.fields.numberInput"),
                     value: codeBlock(number)
                 },
                 {
-                    name: "Kết quả:",
+                    name: i18next.t("numberToBinary.fields.resultOutput"),
                     value: codeBlock(numToBin(number))
                 }
             ],

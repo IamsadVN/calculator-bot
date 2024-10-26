@@ -1,14 +1,15 @@
 import { codeBlock } from "discord.js";
+import i18next from "i18next";
 
 export default {
     name: "fact",
     description: "Phân tích 1 số ra thừa số nguyên tố",
     
-    async executeMessage(message,args) {
+    async executeMessage(message,args,i18next) {
         const number = Number(args[0]);
 
         if (number > 9007199254740991) {
-            await message.channel.send("Con số lớn đến nỗi JavaScript đe'o thể lưu vào và hỗ trợ nó, vui lòng chọn con số nào nhỏ giúp!");
+            await message.channel.send(i18next.t("fact.error.numberTooLarge"));
             return;
         }
 
@@ -17,14 +18,14 @@ export default {
 
         const embed = {
             color: 0x3399ff,
-            title: "Phân tích 1 số sang thừa số nguyên tố",
+            title: i18next.t("fact.title"),
             fields: [
                 {
-                    name: "Input:",
+                    name: i18next.t("fact.fields.numberInput"),
                     value: codeBlock(number)
                 },
                 {
-                    name: "Result:",
+                    name: i18next.t("fact.fields.resultOutput"),
                     value: codeBlock(formattedResult)
                 }
             ],
@@ -40,12 +41,12 @@ export default {
         });
     },
 
-    async executeChatInput(interaction) {
+    async executeChatInput(interaction,i18next) {
         const number = interaction.options.getNumber("input");
 
         if (number > 9007199254740991) {
             await interaction.reply({
-                content: "Con số lớn đến nỗi JavaScript đe'o thể lưu vào và hỗ trợ nó, vui lòng chọn con số nào nhỏ giúp!",
+                content: i18next.t("fact.error.numberTooLarge"),
                 ephemeral: true
             });
             return;
@@ -58,14 +59,14 @@ export default {
 
         const embed = {
             color: 0x3399ff,
-            title: "Phân tích 1 số sang thừa số nguyên tố",
+            title: i18next.t("fact.title"),
             fields: [
                 {
-                    name: "Input:",
+                    name: i18next.t("fact.fields.numberInput"),
                     value: codeBlock(number)
                 },
                 {
-                    name: "Result:",
+                    name: i18next.t("fact.fields.resultOutput"),
                     value: codeBlock(formattedResult)
                 }
             ],

@@ -1,0 +1,93 @@
+{
+    "hpt": {
+        "description": "System of quadratic equations in two variables",
+        "error": {
+            "wrongEquation": "It seems like you entered it incorrectly, please enter it again!",
+            "diffVariable": "Two equations do not have the same variable names!"
+        },
+        "title": "System of linear equations in two variables",
+        "fields": {
+            "inputBlock1": "Equation 1:",
+            "inputBlock2": "Equation 2:",
+            "outputBlock1": "Value of {{var1}}",
+            "outputBlock2": "Value of {{var2}}"
+        }
+    },
+
+    "lang": {
+        "changedLang": "Language changed successfully!"
+    },
+
+    "fact": {
+        "description": "Prime factorization of a number",
+        "error": {
+            "numberTooLarge": "The number is too large to process, please try again!"
+        },
+        "title": "Prime factorization of a number",
+        "fields": {
+            "numberInput": "Number:",
+            "resultOutput": "Result:"
+        }
+    },
+    
+    "ping": {
+        "description": "Check the response speed of Casio fx-580VN X",
+        "fields": {
+            "uptime": "Uptime",
+            "latency": "Latency"
+        }
+    },
+
+    "numberToBinary": {
+        "description": "Convert a number to binary",
+        "title": "Convert a number to binary",
+        "fields": {
+            "numberInput": "Number:",
+            "resultOutput": "Result:"
+        }
+    },
+
+    "binaryToText": {
+        "description": "Convert a binary string to text",
+        "title": "Binary to text",
+        "fields": {
+            "binaryInput": "Binary code:",
+            "resultOutput": "Result:"
+        }
+    },
+
+    "binaryToNumber": {
+        "description": "Convert a binary string to a number",
+        "error": {
+            "invalidBinary": "Please enter a valid binary string"
+        },
+        "title": "Binary to number",
+        "fields": {
+            "binaryInput": "Binary code:",
+            "resultOutput": "Result:"
+        }
+    },
+
+    "bcnn": {
+        "description": "Find the least common multiple of two numbers",
+        "error": {
+            "isInvalidNumber": "One of the numbers must be greater than 0!",
+            "isNotInteger": "One of the numbers must be an integer!"
+        },
+        "title": "Least common multiple",
+        "fields": {
+            "numberInput1": "First number:",
+            "numberInput2": "Second number:",
+            "resultOutput": "Result:"
+        }
+    },
+
+    "textToBinary": {
+        "description": "Convert text to binary",
+        "title": "Text to binary",
+        "fields": {
+            "textInput": "Text:",
+            "resultOutput": "Result:"
+        }
+    }
+}

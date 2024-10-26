@@ -17,18 +17,18 @@ export default {
     aliases: ["lcm"],
     description: "Tìm bội chung nhỏ nhất của 2 số",
 
-    async executeMessage(message,args) {
+    async executeMessage(message,args,i18next) {
         const number1 = Number(args[0]);
         const number2 = Number(args[1]);
 
         if (number1 <= 0 || number2 <= 0) {
             return message.channel.send({
-                content: "Một trong 2 số phải lớn hơn 0 !"
+                content: i18next.t("bcnn.error.isInvalidNumber")
             });
         } 
         else if (isNaN(number1) || isNaN(number2)) {
             return message.channel.send({
-                content: "Một trong 2 số phải là số nguyên!"
+                content: i18next.t("bcnn.error.isNotInteger")
             });
         }
 
@@ -36,20 +36,20 @@ export default {
 
         const embed = {
             color: 0x3399ff,
-            title: "Bội Chung Nhỏ Nhất",
+            title: i18next.t("bcnn.title"),
             fields: [
                 {
-                    name: "Số thứ nhất:",
+                    name: i18next.t("bcnn.fields.numberInput1"),
                     value: codeBlock(number1),
                     inline: true
                 },
                 {
-                    name: "Số thứ hai:",
+                    name: i18next.t("bcnn.fields.numberInput2"),
                     value: codeBlock(number2),
                     inline: true
                 },
                 {
-                    name: "Kết quả:",
+                    name: i18next.t("bcnn.fields.resultOutput"),
                     value: codeBlock(resultBcnn)
                 }
             ],
@@ -71,20 +71,20 @@ export default {
 
         const embed = {
             color: 0x3399ff,
-            title: "Bội chung nhỏ nhất",
+            title: i18next.t("bcnn.title"),
             fields: [
                 {
-                    name: "Số thứ nhất:",
+                    name: i18next.t("bcnn.fields.numberInput1"),
                     value: codeBlock(number1),
                     inline: true
                 },
                 {
-                    name: "Số thứ hai:",
+                    name: i18next.t("bcnn.fields.numberInput2"),
                     value: codeBlock(number2),
                     inline: true
                 },
                 {
-                    name: "Kết quả:",
+                    name: i18next.t("bcnn.fields.resultOutput"),
                     value: codeBlock(resultBcnn)
                 }
             ],

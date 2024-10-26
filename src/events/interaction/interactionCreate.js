@@ -1,4 +1,6 @@
+import { getLang } from "../../../function/getLang.js";
 import { commandLog } from "../../../function/log.js";
+import i18next from "i18next";
 
 export default {
     name: "interactionCreate",
@@ -10,9 +12,11 @@ export default {
             ))
         );
 
+        i18next.changeLanguage(await getLang(interaction.guildId));
+
         if (interaction.isChatInputCommand()) {
             if (!command) return;
-            await command.executeChatInput?.(interaction);
+            await command.executeChatInput?.(interaction,i18next);
             commandLog(`${interaction.guild} / ${interaction.user.tag}`,command.name,"Slash Command");
         }
         else if (interaction.isAutocomplete()) 

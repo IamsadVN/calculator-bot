@@ -1,0 +1,93 @@
+{
+    "hpt": {
+        "description": "Hệ Phương Trình Tính Tuyến 2 Ẩn",
+        "error": {
+            "wrongEquation": "Có vẻ như bạn đã nhập sai, hãy nhập lại!",
+            "diffVariable": "2 Phương Trình không có cùng tên biến!"
+        },
+        "title": "Hệ Phương Trình Tính Tuyến 2 Ẩn",
+        "fields": {
+            "inputBlock1": "Phương trình 1:",
+            "inputBlock2": "Phương trình 2:",
+            "outputBlock1": "Giá trị {{var1}}",
+            "outputBlock2": "Giá trị {{var2}}"
+        }
+    },
+
+    "lang": {
+        "changedLang": "Thay đổi ngôn ngữ thành công!"
+    },
+
+    "fact": {
+        "description": "Phân tích 1 số ra thừa số nguyên tố",
+        "error":{
+            "numberTooLarge": "Con số quá lớn để có thể thực hiện câu lệnh, vui lòng thử lại!"
+        }, 
+        "title": "Phân tích 1 số ra thừa số nguyên tố",
+        "fields": {
+            "numberInput": "Con số:",
+            "resultOutput": "Kết quả:"
+        }
+    },
+
+    "ping": {
+        "description": "Kiểm tra tốc độ phản hồi của Casio fx-580VN X",
+        "fields": {
+            "uptime": "Thời gian hoạt động",
+            "latency": "Độ trễ"
+        }
+    },
+
+    "numberToBinary": {
+        "description": "Chuyển đổi 1 số thành mã nhị phân",
+        "title": "Chuyển đổi 1 số thành mã nhị phân",
+        "fields": {
+            "numberInput": "Con số:",
+            "resultOutput": "Kết quả:"
+        }
+    },
+    
+    "binaryToText": {
+        "description": "Chuyển đổi 1 chuỗi nhị phân sang chữ",
+        "title": "Mã nhị phân sang chữ",
+        "fields": {
+            "binaryInput": "Mã nhị phân:",
+            "resultOutput": "Kết quả:"
+        }
+    },
+    
+    "binaryToNumber": {
+        "description": "Chuyển đổi 1 chuỗi nhị phân sang chữ số",
+        "error": {
+            "invalidBinary": "Vui lòng nhập 1 dãy nhị phân hợp lệ"
+        },
+        "title": "Mã nhị phân sang số",
+        "fields": {
+            "binaryInput": "Mã nhị phân:",
+            "resultOutput": "Kết quả:"
+        }
+    },
+
+    "bcnn": {
+        "description": "Tìm bội chung nhỏ nhất của 2 số",
+        "error": {
+            "isInvalidNumber": "Một trong 2 số phải lớn hơn 0 !",
+            "isNotInteger": "Một trong 2 số phải là số nguyên!"
+        },
+        "title": "Bội chung nhỏ nhất",
+        "fields": {
+            "numberInput1": "Số thứ nhất:",
+            "numberInput2": "Số thứ hai:",
+            "resultOutput": "Kết quả:"
+        }
+    },
+
+    "textToBinary": {
+        "description": "Chuyển văn bản thành mã nhị phân",
+        "title": "văn bản sang mã nhị phân",
+        "fields": {
+            "textInput": "Văn bản:",
+            "resultOutput": "Kết quả:"
+        }
+    }
+}

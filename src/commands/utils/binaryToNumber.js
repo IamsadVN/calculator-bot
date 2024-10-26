@@ -20,24 +20,24 @@ export default {
     description: "Converts a binary to decimal",
     aliases: ["b2n"],
 
-    async executeMessage(message,args) {
+    async executeMessage(message,args,i18next) {
         const result = binToNum(args[0]);
 
         if (result === "error") {
-            await message.channel.send("Vui lòng nhập 1 dãy nhị phân hợp lệ");
+            await message.channel.send(i18next.t("binaryToNumber.error.invalidBinary"));
             return;
         }
 
         const embed = {
             color: 0x3399ff,
-            title: "Binary To Number",
+            title: i18next.t("binaryToNumber.title"),
             fields: [
                 {
-                    name: "Input:",
+                    name: i18next.t("binaryToNumber.fields.binaryInput"),
                     value: codeBlock(args[0])
                 },
                 {
-                    name: "Output:",
+                    name: i18next.t("binaryToNumber.resultOutput"),
                     value: codeBlock(result)
                 }
             ],
@@ -53,12 +53,12 @@ export default {
         });
     },
 
-    async executeChatInput(interaction) {
+    async executeChatInput(interaction,i18next) {
         const result = binToNum(interaction.options.getString("input"));
 
         if (result === "error") {
             await interaction.reply({
-                content: "Vui lòng cho 1 dãy nhị phân, đe'o phải là số 2",
+                content: i18next.t("binaryToNumber.error.invalidBinary"),
                 ephemeral: true
             });
             return;
@@ -66,14 +66,14 @@ export default {
 
         const embed = {
             color: 0x3399ff,
-            title: "Binary To Number",
+            title: i18next.t("binaryToNumber.title"),
             fields: [
                 {
-                    name: "Input:",
+                    name: i18next.t("binaryToNumber.fields.binaryInput"),
                     value: codeBlock(interaction.options.getString("input"))
                 },
                 {
-                    name: "Output:",
+                    name: i18next.t("binaryToNumber.fields.resultOutput"),
                     value: codeBlock(result)
                 }
             ],

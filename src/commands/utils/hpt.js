@@ -1,4 +1,5 @@
 import { codeBlock } from "discord.js";
+import i18next from "i18next";
 import * as math from "mathjs";
 
 export default {
@@ -6,18 +7,18 @@ export default {
     description: "Hệ Phương Trình Tính Tuyến 2 Ẩn",
     aliases: ["seq"],
 
-    async executeMessage(message,args) {
+    async executeMessage(message,args,i18next) {
         const [equation1, c1] = args[0].split("=");
         const [equation2, c2] = args[1].split("=");
         const valEquation1 = getValueOfEquation(equation1);
         const valEquation2 = getValueOfEquation(equation2);
 
         if (valEquation1 === "error" || valEquation2 === "error") {
-            await message.channel.send("Có vẻ như bạn đã nhập sai, hãy nhập lại!");
+            await message.channel.send(i18next.t("hpt.error.wrongEquation"));
             return;
         }
         else if(valEquation1.variable_1 !== valEquation2.variable_1 && valEquation1.variable_2 !== valEquation2.variable_2) {
-            await message.channel.send("2 Phương Trình không có cùng tên biến!");
+            await message.channel.send(i18next.t("hpt.error.diffVariable"));
             return;
         }
         
@@ -30,23 +31,23 @@ export default {
 
         const embed = {
             color: 0x3399ff,
-            title: "Hệ Phương Trình Tính Tuyến 2 Ẩn",
+            title: i18next.t("hpt.title"),
             fields: [
                 {
-                    name: "Phương trình 1:",
+                    name: i18next.t("hpt.fields.inputBlock1"),
                     value: codeBlock(args[0])
                 },
                 {
-                    name: "Phương trình 2:",
+                    name: i18next.t("hpt.fields.inputBlock2"),
                     value: codeBlock(args[1])
                 },
                 {
-                    name: `Giá trị ${valEquation1.variable_1.toUpperCase()}:`,
+                    name: i18next.t("hpt.fields.outputBlock1", {var1: valEquation1.variable_1.toUpperCase()}),
                     value: codeBlock(`${valEquation1.variable_1} = ${resultSeq.xValue}`),
                     inline: true
                 },
                 {
-                    name: `Giá trị ${valEquation1.variable_2.toUpperCase()}:`,
+                    name: i18next.t("hpt.fields.outputBlock2", {var2: valEquation1.variable_2.toUpperCase()}),
                     value: codeBlock(`${valEquation1.variable_2} = ${resultSeq.yValue}`),
                     inline: true
                 }
@@ -63,7 +64,7 @@ export default {
         });
     },
 
-    async executeChatInput(interaction) {
+    async executeChatInput(interaction,i18next) {
         const [equation1, c1] = interaction.options.getString("equation-1").replaceAll(" ","").split("=");
         const [equation2, c2] = interaction.options.getString("equation-2").replaceAll(" ","").split("=");
         
@@ -72,13 +73,13 @@ export default {
 
         if (valEquation1 === "error" || valEquation2 === "error") {
             await interaction.reply({
-                content: "Có vẻ như bạn đã nhập sai, hãy nhập lại lần nữa",
+                content: i18next.t("hpt.error.wrongEquation"),
                 ephemeral: true
             });
             return;
         }
         else if (valEquation1.variable_1 !== valEquation2.variable_1 && valEquation1.variable_2 !== valEquation2.variable_2) {
-            await interaction.reply("2 Phương Trình không có cùng tên biến");
+            await interaction.reply(i18next.t("hpt.error.diffVariable"));
             return;
         }
 
@@ -91,23 +92,23 @@ export default {
 
         const embed = {
             color: 0x3399ff,
-            title: "Hệ Phương Trình Tính Tuyến 2 Ẩn",
+            title: i18next.t("hpt.title"),
             fields: [
                 {
-                    name: "Phương trình 1:",
+                    name: i18next.t("hpt.fields.inputBlock1"),
                     value: codeBlock(interaction.options.getString("equation-1"))
                 },
                 {
-                    name: "Phương trình 2:",
+                    name: i18next.t("hpt.fields.inputBlock2"),
                     value: codeBlock(interaction.options.getString("equation-2"))
                 },
                 {
-                    name: `Giá trị ${valEquation1.variable_1.toUpperCase()}:`,
+                    name: i18next.t("hpt.fields.outputBlock1", {var1: valEquation1.variable_1.toUpperCase()}), //`Giá trị ${valEquation1.variable_1.toUpperCase()}:`,
                     value: codeBlock(`${valEquation1.variable_1} = ${resultSeq.xValue}`),
                     inline: true
                 },
                 {
-                    name: `Giá trị ${valEquation1.variable_2.toUpperCase()}:`,
+                    name: i18next.t("hpt.fields.outputBlock2", {var2: valEquation1.variable_2.toUpperCase()}), //`Giá trị ${valEquation1.variable_2.toUpperCase()}:`,
                     value: codeBlock(`${valEquation1.variable_2} = ${resultSeq.yValue}`),
                     inline: true
                 }

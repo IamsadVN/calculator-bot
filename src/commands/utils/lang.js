@@ -2,11 +2,12 @@ import langOfEachGuild from "../../../schemas/LangOfGuild.js";
 
 export default {
     name: 'language',
-    description: 'Chỉnh ngôn ngữ cho máy chủ - Change the language (Only using ISO-639)',
+    description: 'Chỉnh ngôn ngữ của máy tính - Change the language (Only using ISO-639)',
     aliases: ["lang"],
 
-    async executeMessage(message,args) {
-        const typeLang = args[0];
+    async executeMessage(message,args,i18next) {
+        const langCode = args[0];
+
         let guildToChangeLang = await langOfEachGuild.findOne({
             guildID: message.guild.id
         });
@@ -17,14 +18,14 @@ export default {
             });
         }
 
-        guildToChangeLang.lang = typeLang;
+        guildToChangeLang.lang = langCode;
         await guildToChangeLang.save();
 
-        message.channel.send("Thay đổi ngôn ngữ thành công")
+        message.channel.send(i18next.t("lang.changedLang"))
     },
 
-    async executeChatInput(interaction) {
-        const typeLang = interaction.options.getString("type");
+    async executeChatInput(interaction,i18next) {
+        const langCode = interaction.options.getString("type");
 
         await interaction.deferReply();
 
@@ -40,11 +41,11 @@ export default {
         }
         //Có nghĩa rằng sau khi check xem đã có hay chưa, giờ
         //Sẽ add thêm lang vào
-        guildToChangeLang.lang = typeLang;
+        guildToChangeLang.lang = langCode;
         
         await guildToChangeLang.save();
 
-        interaction.editReply(`Đã chỉnh ngôn ngữ thành công`);
+        interaction.editReply(i18next.t("lang.changedLang"));
     },
 
     registerApplicationCommands(commands) {
