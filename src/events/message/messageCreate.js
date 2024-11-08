@@ -25,8 +25,6 @@ export default {
 
         if (!command) return;
         
-        i18next.changeLanguage(await getLang(message.guild.id));
-
         await command.executeMessage?.(message,args,i18next);
         
         commandLog(`${message.guild} / ${message.author.username}`,command.name,"Prefix");

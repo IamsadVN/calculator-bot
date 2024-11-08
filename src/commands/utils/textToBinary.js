@@ -1,4 +1,5 @@
-import { codeBlock } from "discord.js";
+import { codeBlock, EmbedBuilder, SlashCommandBuilder } from "discord.js";
+import { getLang } from "../../../function/getLang.js";
 
 function textToCharCode(str) {
     return [...str].map((x) => x.charCodeAt(0));
@@ -39,26 +40,26 @@ export default {
 
     async executeMessage(message,args,i18next) {
         const inputText = args.join(" ");
+        const language = await getLang(message.guild.id);
 
-        const embed = {
-            color: 0x3399ff,
-            title: i18next.t("textToBinary.title"),
-            fields: [
+        const embed = new EmbedBuilder()
+            .setColor(Number(process.env.CALC))
+            .setTitle(i18next.t("textToBinary.title",{lng: language}))
+            .setFields([
                 {
-                    name: i18next.t("textToBinary.fields.textInput"),
+                    name: i18next.t("textToBinary.fields.textInput",{lng: language}),
                     value: codeBlock(inputText)
                 },
                 {
-                    name: i18next.t("textToBinary.fields.resultOutput"),
+                    name: i18next.t("textToBinary.fields.resultOutput",{lng: language}),
                     value: codeBlock(textToBinary(inputText))
                 }
-            ],
-            footer: {
+            ])
+            .setFooter({
                 text: message.author.username,
-                icon_url: message.author.displayAvatarURL({size: 64})
-            },
-            timestamp: new Date().toISOString()
-        };
+                iconURL: message.author.displayAvatarURL({size: 64})
+            })
+            .setTimestamp(new Date())
 
         await message.channel.send({
             embeds: [embed]
@@ -66,45 +67,44 @@ export default {
     },
 
     async executeChatInput(interaction,i18next) {
+        const language = await getLang(interaction.guildId);
+
         const inputText = interaction.options.getString("input");
 
-        const embed = {
-            color: 0x3399ff,
-            title: i18next.t("textToBinary.title"),
-            fields: [
+        const embed = new EmbedBuilder()
+            .setColor(Number(process.env.CALC))
+            .setTitle(i18next.t("textToBinary.title",{lng: language}))
+            .setFields([
                 {
-                    name: i18next.t("textToBinary.fields.textInput"),
+                    name: i18next.t("textToBinary.fields.textInput",{lng: language}),
                     value: codeBlock(inputText)
                 },
                 {
-                    name: i18next.t("textToBinary.fields.resultOutput"),
+                    name: i18next.t("textToBinary.fields.resultOutput",{lng: language}),
                     value: codeBlock(textToBinary(inputText))
                 }
-            ],
-            footer: {
+            ])
+            .setFooter({
                 text: interaction.user.tag,
-                icon_url: interaction.user.displayAvatarURL({size: 64})
-            },
-            timestamp: new Date().toISOString()
-        };
-
+                iconURL: interaction.user.displayAvatarURL({size: 64})
+            })
+            .setTimestamp(new Date())
+        
         await interaction.reply({
             embeds: [embed]
         })
     },
 
     registerApplicationCommands(commands) {
-        commands.push({
-            name: this.name,
-            description: this.description,
-            options: [
-                {
-                    required: true,
-                    name: "input",
-                    type: 3,
-                    description: "Hãy nhập ký tự vào đây"
-                }
-            ]
-        })
+        commands.push(new SlashCommandBuilder()
+            .setName(this.name)
+            .setDescription(this.description)
+            .setContexts([0,2])
+            .addStringOption(option => 
+                option.setName("input")
+                    .setDescription("Hãy nhập ký tự vào đây")
+                    .setRequired(true)
+            )
+        )
     }
 }

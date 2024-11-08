@@ -2,7 +2,7 @@ import { config } from "dotenv";
 import { Client, GatewayIntentBits, Collection } from "discord.js";
 import { loadEvents, loadCommands } from "./utils/loader.js";
 import { errorLog, infoLog } from "../function/log.js"
-import mongoose, { get } from "mongoose";
+import mongoose from "mongoose";
 import i18next from "i18next";
 import Backend from "i18next-fs-backend";
 
@@ -21,14 +21,14 @@ i18next.use(Backend).init({
     fallbackLng: "vi",
     preload: ["en","vi"],
     backend: {
-        loadPath: "./locales/{{lng}}/translation.json"
+        loadPath: "./locales/{{lng}}.json"
     }
-}, (err,t) => {
+}, (err) => {
     if (err) return errorLog(err);
     infoLog("Multiple Language loaded");
 })
 
-//Client Gateway
+//Client
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,

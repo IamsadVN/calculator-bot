@@ -1,6 +1,6 @@
-import { codeBlock } from "discord.js";
-import i18next from "i18next";
+import { codeBlock, Embed, EmbedBuilder, SlashCommandBuilder } from "discord.js";
 import * as math from "mathjs";
+import { getLang } from "../../../function/getLang.js";
 
 export default {
     name: "hpt",
@@ -12,13 +12,14 @@ export default {
         const [equation2, c2] = args[1].split("=");
         const valEquation1 = getValueOfEquation(equation1);
         const valEquation2 = getValueOfEquation(equation2);
+        const language = await getLang(message.guild.id);
 
         if (valEquation1 === "error" || valEquation2 === "error") {
-            await message.channel.send(i18next.t("hpt.error.wrongEquation"));
+            await message.channel.send(i18next.t("hpt.error.wrongEquation",{lng: language}));
             return;
         }
         else if(valEquation1.variable_1 !== valEquation2.variable_1 && valEquation1.variable_2 !== valEquation2.variable_2) {
-            await message.channel.send(i18next.t("hpt.error.diffVariable"));
+            await message.channel.send(i18next.t("hpt.error.diffVariable",{lng: language}));
             return;
         }
         
@@ -29,35 +30,34 @@ export default {
 
         const resultSeq = calculateSeq(a1,b1,c1,a2,b2,c2);
 
-        const embed = {
-            color: 0x3399ff,
-            title: i18next.t("hpt.title"),
-            fields: [
+        const embed = new EmbedBuilder()
+            .setColor(Number(process.env.CALC))
+            .setTitle(i18next.t("hpt.title",{lng: language}))
+            .setFields([
                 {
-                    name: i18next.t("hpt.fields.inputBlock1"),
+                    name: i18next.t("hpt.fields.inputBlock1",{lng: language}),
                     value: codeBlock(args[0])
                 },
                 {
-                    name: i18next.t("hpt.fields.inputBlock2"),
+                    name: i18next.t("hpt.fields.inputBlock2",{lng: language}),
                     value: codeBlock(args[1])
                 },
                 {
-                    name: i18next.t("hpt.fields.outputBlock1", {var1: valEquation1.variable_1.toUpperCase()}),
+                    name: i18next.t("hpt.fields.outputBlock1", {var1: valEquation1.variable_1.toUpperCase(), lng: language}),
                     value: codeBlock(`${valEquation1.variable_1} = ${resultSeq.xValue}`),
                     inline: true
                 },
                 {
-                    name: i18next.t("hpt.fields.outputBlock2", {var2: valEquation1.variable_2.toUpperCase()}),
+                    name: i18next.t("hpt.fields.outputBlock2", {var2: valEquation1.variable_2.toUpperCase(), lng: language}),
                     value: codeBlock(`${valEquation1.variable_2} = ${resultSeq.yValue}`),
                     inline: true
                 }
-            ],
-            footer: {
+            ])
+            .setFooter({
                 text: message.author.username,
-                icon_url: message.author.displayAvatarURL()
-            },
-            timestamp: new Date().toISOString()
-        };
+                iconURL: message.author.displayAvatarURL({size:64})
+            })
+            .setTimestamp(new Date())
 
         await message.channel.send({
             embeds: [embed]
@@ -71,16 +71,19 @@ export default {
         const valEquation1 = getValueOfEquation(equation1);
         const valEquation2 = getValueOfEquation(equation2);
 
+        const language = await getLang(interaction.guildId)
+
         if (valEquation1 === "error" || valEquation2 === "error") {
-            await interaction.reply({
-                content: i18next.t("hpt.error.wrongEquation"),
+            return interaction.reply({
+                content: i18next.t("hpt.error.wrongEquation",{lng: language}),
                 ephemeral: true
             });
-            return;
         }
         else if (valEquation1.variable_1 !== valEquation2.variable_1 && valEquation1.variable_2 !== valEquation2.variable_2) {
-            await interaction.reply(i18next.t("hpt.error.diffVariable"));
-            return;
+            return interaction.reply({
+                content: i18next.t("hpt.error.diffVariable",{lng: language}),
+                ephemeral: true
+            });
         }
 
         const a1 = math.evaluate(valEquation1.coefficient_1);
@@ -90,60 +93,57 @@ export default {
 
         const resultSeq = calculateSeq(a1,b1,c1,a2,b2,c2);
 
-        const embed = {
-            color: 0x3399ff,
-            title: i18next.t("hpt.title"),
-            fields: [
+        const embed = new EmbedBuilder()
+            .setColor(Number(process.env.CALC))
+            .setTitle(i18next.t("hpt.title",{lng: language}))
+            .setFields([
                 {
-                    name: i18next.t("hpt.fields.inputBlock1"),
+                    name: i18next.t("hpt.fields.inputBlock1",{lng: language}),
                     value: codeBlock(interaction.options.getString("equation-1"))
                 },
                 {
-                    name: i18next.t("hpt.fields.inputBlock2"),
+                    name: i18next.t("hpt.fields.inputBlock2",{lng: language}),
                     value: codeBlock(interaction.options.getString("equation-2"))
                 },
                 {
-                    name: i18next.t("hpt.fields.outputBlock1", {var1: valEquation1.variable_1.toUpperCase()}), //`Giá trị ${valEquation1.variable_1.toUpperCase()}:`,
+                    name: i18next.t("hpt.fields.outputBlock1", {var1: valEquation1.variable_1.toUpperCase(), lng: language}), //`Giá trị ${valEquation1.variable_1.toUpperCase()}:`,
                     value: codeBlock(`${valEquation1.variable_1} = ${resultSeq.xValue}`),
                     inline: true
                 },
                 {
-                    name: i18next.t("hpt.fields.outputBlock2", {var2: valEquation1.variable_2.toUpperCase()}), //`Giá trị ${valEquation1.variable_2.toUpperCase()}:`,
+                    name: i18next.t("hpt.fields.outputBlock2", {var2: valEquation1.variable_2.toUpperCase(), lng: language}), //`Giá trị ${valEquation1.variable_2.toUpperCase()}:`,
                     value: codeBlock(`${valEquation1.variable_2} = ${resultSeq.yValue}`),
                     inline: true
                 }
-            ],
-            footer: {
+            ])
+            .setFooter({
                 text: interaction.user.tag,
-                icon_url: interaction.user.displayAvatarURL()
-            },
-            timestamp: new Date().toISOString()
-        };
+                iconURL: interaction.user.displayAvatarURL({size:64})
+            })
+            .setTimestamp(new Date())
 
+        
         await interaction.reply({
             embeds: [embed]
         });
     },
 
     registerApplicationCommands(commands) {
-        commands.push({
-            name: this.name,
-            description: this.description,
-            options: [
-                {
-                    required: true,
-                    name: "equation-1",
-                    description: "Type your first Equation here",
-                    type: 3
-                },
-                {
-                    required: true,
-                    name: "equation-2",
-                    description: "Type your second Equation here",
-                    type: 3
-                }
-            ]
-        })
+        commands.push(new SlashCommandBuilder()
+            .setName(this.name)
+            .setDescription(this.description)
+            .setContexts([0,2])
+            .addStringOption(option =>
+                option.setName("equation-1")
+                    .setDescription("Nhập phương trình thứ nhất")
+                    .setRequired(true)
+            )
+            .addStringOption(option => 
+                option.setName("equation-2")
+                    .setDescription("Nhập phương trình thứ hai")
+                    .setRequired(true)
+            )
+        )
     }
 }
 

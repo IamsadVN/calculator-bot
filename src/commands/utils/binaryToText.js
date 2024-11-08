@@ -1,7 +1,8 @@
-import { codeBlock } from "discord.js";
+import { codeBlock, EmbedBuilder, SlashCommandBuilder } from "discord.js";
+import { getLang } from "../../../function/getLang.js";
 
 function bitToText(str) {
-    return [...str.split(/ +/g)].map((x) => String.fromCharCode(parseInt(x,2))).join("");
+    return [...str.split(/ +/g)].map((x) => String.fromCharCode(parseInt(x, 2))).join("");
 }
 
 export default {
@@ -9,56 +10,70 @@ export default {
     aliases: ["b2t"],
     description: "Converts a binary string to a text",
 
-    async executeMessage(message,args,i18next) {
+    async executeMessage(message, args, i18next) {
         const binaryString = args.join(" ");
+        const language = await getLang(message.guild.id)
 
-        const embed = {
-            color: 0x3399ff,
-            title: i18next.t("binaryToText.title"),
-            fields: [
+        if (binaryString.search(/^[01\s]+/gm) === -1) {
+            return message.channel.send({
+                content: i18next.t("binaryToText.error.isInvalidBinary", { lng: language })
+            })
+        }
+
+        const embed = new EmbedBuilder()
+            .setColor(Number(process.env.CALC))
+            .setTitle(i18next.t("binaryToText.title", { lng: language }))
+            .setFields([
                 {
-                    name: i18next.t("binaryToText.fields.binaryInput"),
+                    name: i18next.t("binaryToText.fields.binaryInput", { lng: language }),
                     value: codeBlock(binaryString)
                 },
                 {
-                    name: i18next.t("binaryToText.fields.binaryOutput"),
+                    name: i18next.t("binaryToText.fields.resultOutput", { lng: language }),
                     value: codeBlock(bitToText(binaryString))
                 }
-            ],
-            footer: {
+            ])
+            .setFooter({
                 text: message.author.username,
-                icon_url: message.author.displayAvatarURL({size: 64})
-            },
-            timestamp: new Date().toISOString()
-        };
+                iconURL: message.author.displayAvatarURL({ size: 64 })
+            })
+            .setTimestamp(new Date())
 
         await message.channel.send({
             embeds: [embed]
         });
     },
 
-    async executeChatInput(interaction,i18next) {
+    async executeChatInput(interaction, i18next) {
         const binaryString = interaction.options.getString("input");
+        const language = await getLang(interaction.guildId)
 
-        const embed = {
-            color: 0x3399ff,
-            title: i18next.t("binaryToText.title"),
-            fields: [
+        if (binaryString.search(/^[01\s]+/gm) === -1) {
+            return interaction.reply({
+                content: i18next.t("binaryToText.error.isInvalidBinary", { lng: language }),
+                ephemeral: true
+            })
+        }
+
+        const embed = new EmbedBuilder()
+            .setColor(Number(process.env.CALC))
+            .setTitle(i18next.t("binaryToText.title", { lng: language }))
+            .setFields([
                 {
-                    name: i18next.t("binaryToText.fields.binaryInput"),
+                    name: i18next.t("binaryToText.fields.binaryInput", { lng: language }),
                     value: codeBlock(binaryString)
                 },
                 {
-                    name: i18next.t("binaryToText.fields.resultOutput"),
+                    name: i18next.t("binaryToText.fields.resultOutput", { lng: language }),
                     value: codeBlock(bitToText(binaryString))
                 }
-            ],
-            footer: {
+            ])
+            .setFooter({
                 text: interaction.user.tag,
-                icon_url: interaction.user.displayAvatarURL({size: 64})
-            },
-            timestamp: new Date().toISOString()
-        };
+                iconURL: interaction.user.displayAvatarURL({ size: 64 })
+            })
+            .setTimestamp(new Date())
+
 
         await interaction.reply({
             embeds: [embed]
@@ -66,17 +81,15 @@ export default {
     },
 
     registerApplicationCommands(commands) {
-        commands.push({
-            name: this.name,
-            description: this.description,
-            options: [
-                {
-                    required: true,
-                    name: "input",
-                    type: 3,
-                    description: "Input a binary right here"
-                }
-            ]
-        })
+        commands.push(new SlashCommandBuilder()
+            .setName(this.name)
+            .setDescription(this.description)
+            .setContexts([0, 2])
+            .addStringOption(option =>
+                option.setName("input")
+                    .setDescription("Nhập một dãy nhị phân")
+                    .setRequired(true)
+            )
+        )
     }
 }

@@ -15,13 +15,26 @@
     },
 
     "lang": {
-        "changedLang": "Language changed successfully!"
+        "autocomplete": {
+            "choices": [
+                {
+                    "name": "Vietnamese",
+                    "value": "vi"
+                },
+                {
+                    "name": "English",
+                    "value": "en"
+                }
+            ]
+        },
+        "changedLang": "Language has been successfully changed to `{{language}}`!"
     },
 
     "fact": {
         "description": "Prime factorization of a number",
         "error": {
-            "numberTooLarge": "The number is too large to process, please try again!"
+            "numberTooLarge": "The number is too large to process, please try again!",
+            "isNotInteger": "The number provided is not an integer!"
         },
         "title": "Prime factorization of a number",
         "fields": {
@@ -50,6 +63,9 @@
     "binaryToText": {
         "description": "Convert a binary string to text",
         "title": "Binary to text",
+        "error": {
+            "isInvalidBinary": "Invalid binary string!"
+        },
         "fields": {
             "binaryInput": "Binary code:",
             "resultOutput": "Result:"
@@ -87,6 +103,47 @@
         "title": "Text to binary",
         "fields": {
             "textInput": "Text:",
+            "resultOutput": "Result:"
+        }
+    },
+    "ucln": {
+        "description": "Calculates the greatest common divisor of 2 numbers",
+        "error": {
+            "isInvalidNumber": "One of the two numbers must be greater than 0.",
+            "isNotInteger": "One of the numbers must be an integer!"
+        },
+        "title": "Greatest Common Divisor",
+        "fields": {
+            "numberInput1": "First number:",
+            "numberInput2": "Second number:",
+            "resultOutput": "Result:"
+        }
+    },
+    "random": {
+        "autocomplete": {
+            "choices": [
+                {
+                    "name": "Decimal",
+                    "value": "decimal"
+                },
+                {
+                    "name": "Integer",
+                    "value": "integer"
+                }
+            ]
+        },
+        "error": {
+            "amountTooLarge": "The amount to randomize is too large, it cannot exceed 50!",
+            "maxTooLarge": "The maximum constraint is too large to randomize, it cannot exceed 1 billion!",
+            "minGreaterThanMax": "The minimum constraint cannot be greater than the maximum constraint!",
+            "onlySupportSlashCommand": "Sorry, this command only supports Slash Command. Please switch to using Slash Command."
+        },
+        "title": "Random Number",
+        "fields": {
+            "typeInput": "Type of random number:",
+            "minInput": "Minimum constraint:",
+            "maxInput": "Maximum constraint:",
+            "amountInput": "Number of random numbers:",
             "resultOutput": "Result:"
         }
     }

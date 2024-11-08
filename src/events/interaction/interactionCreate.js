@@ -11,15 +11,18 @@ export default {
                 data.name === interaction.commandName
             ))
         );
-
-        i18next.changeLanguage(await getLang(interaction.guildId));
+        
+        //console.log(interaction.inCachedGuild());
 
         if (interaction.isChatInputCommand()) {
             if (!command) return;
             await command.executeChatInput?.(interaction,i18next);
-            commandLog(`${interaction.guild} / ${interaction.user.tag}`,command.name,"Slash Command");
+
+            if (interaction.inCachedGuild()) commandLog(`${interaction.guild} / ${interaction.user.tag}`,command.name,"Slash Command");
+            else commandLog(`Private Chat / ${interaction.user.tag}`,command.name,"Slash Command");
+            
         }
         else if (interaction.isAutocomplete()) 
-            await command.autocomplete(interaction);
+            await command.autocomplete(interaction,i18next);
     }
 }

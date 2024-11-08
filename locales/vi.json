@@ -15,13 +15,26 @@
     },
 
     "lang": {
-        "changedLang": "Thay đổi ngôn ngữ thành công!"
+        "autocomplete": {
+            "choices": [
+                {
+                    "name": "Tiếng Việt",
+                    "value": "vi"
+                },
+                {
+                    "name": "Tiếng Anh",
+                    "value": "en"
+                }
+            ]
+        },
+        "changedLang": "Đã thay đổi ngôn ngữ sang `{{language}}` thành công!"
     },
 
     "fact": {
         "description": "Phân tích 1 số ra thừa số nguyên tố",
         "error":{
-            "numberTooLarge": "Con số quá lớn để có thể thực hiện câu lệnh, vui lòng thử lại!"
+            "numberTooLarge": "Con số quá lớn để có thể thực hiện câu lệnh, vui lòng thử lại!",
+            "isNotInteger": "Con số đưa ra không phải là 1 số nguyên!"
         }, 
         "title": "Phân tích 1 số ra thừa số nguyên tố",
         "fields": {
@@ -50,6 +63,9 @@
     "binaryToText": {
         "description": "Chuyển đổi 1 chuỗi nhị phân sang chữ",
         "title": "Mã nhị phân sang chữ",
+        "error": {
+            "isInvalidBinary": "Chuỗi nhị phân không hợp lệ!"
+        },
         "fields": {
             "binaryInput": "Mã nhị phân:",
             "resultOutput": "Kết quả:"
@@ -84,9 +100,50 @@
 
     "textToBinary": {
         "description": "Chuyển văn bản thành mã nhị phân",
-        "title": "văn bản sang mã nhị phân",
+        "title": "Văn bản sang mã nhị phân",
         "fields": {
             "textInput": "Văn bản:",
+            "resultOutput": "Kết quả:"
+        }
+    },
+    "ucln": {
+        "description": "Tìm ước chung lớn nhất của 2 số",
+        "error": {
+            "isInvalidNumber": "Một trong 2 số phải lớn hơn 0",
+            "isNotInteger": "Một trong 2 số phải là số nguyên!"
+        },
+        "title": "Ước Chung Lớn Nhất",
+        "fields": {
+            "numberInput1": "Số thứ nhất:",
+            "numberInput2": "Số thứ hai:",
+            "resultOutput": "Kết quả:"
+        }
+    },
+    "random": {
+        "autocomplete": {
+            "choices": [
+                {
+                    "name": "Số Thập Phân",
+                    "value": "decimal"
+                },
+                {
+                    "name": "Số Nguyên",
+                    "value": "integer"
+                }
+            ]
+        },
+        "error": {
+            "amountTooLarge": "Số lượng cần random quá lớn, không thể lớn hơn 50!",
+            "maxTooLarge": "Ràng buộc lớn nhất quá lớn để Random, không thể lớn hơn 1 tỷ!",
+            "minGreaterThanMax": "Ràng buộc nhỏ nhất không thể lớn hơn ràng buộc lớn nhất!",
+            "onlySupportSlashCommand": "Xin lỗi, lệnh chỉ hỗ trợ Slash Command. Vui lòng chuyển sang sử dụng Slash Command"
+        },
+        "title": "Con số ngẫu nhiên",
+        "fields": {
+            "typeInput": "Loại số ngẫu nhiên:",
+            "minInput": "Ràng buộc nhỏ nhất:",
+            "maxInput": "Ràng buộc lớn nhất:",
+            "amountInput": "Số lượng số ngẫu nhiên:",
             "resultOutput": "Kết quả:"
         }
     }

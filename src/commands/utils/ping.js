@@ -1,4 +1,5 @@
-import { codeBlock } from "discord.js";
+import { codeBlock, EmbedBuilder, SlashCommandBuilder } from "discord.js";
+import { getLang } from "../../../function/getLang.js";
 
 function calculateTime(inputSeconds) {
     const hours = Math.floor(inputSeconds / 3600);
@@ -14,31 +15,32 @@ export default {
     description: "Kiểm tra tốc độ phản hồi của Casio fx-580VN X",
 
 
-    async executeMessage(message,i18next) {
-        const embed = {
-            color: 0x3399ff,
-            author: {
+    async executeMessage(message,args,i18next) {
+        const language = await getLang(message.guild.id);
+
+        const embed = new EmbedBuilder()
+            .setColor(Number(process.env.CALC))
+            .setAuthor({
                 name: "Pong 🏓",
-                icon_url: `${message.client.user.displayAvatarURL({size: 64})}`
-            },
-            fields: [
+                iconURL: message.client.user.displayAvatarURL({size:64})
+            })
+            .setFields([
                 {
-                    name: i18next.t("ping.fields.uptime"),
+                    name: i18next.t("ping.fields.uptime",{lng: language}),
                     value: codeBlock(`[${calculateTime(Math.round(process.uptime()))}]`),
                     inline: true
                 },
                 {
-                    name: i18next.t("ping.fields.latency"),
+                    name: i18next.t("ping.fields.latency",{lng: language}),
                     value: codeBlock(`${message.client.ws.ping}ms`),
                     inline: true
                 }
-            ],
-            footer: {
-                text: message.author.username,
-                icon_url: message.author.displayAvatarURL({size: 64})
-            },
-            timestamp: new Date().toISOString()
-        }
+            ])
+            .setFooter({
+                text: message.author.name,
+                iconURL: message.author.displayAvatarURL({size: 64})
+            })
+            .setTimestamp(new Date())
 
         await message.channel.send({
             embeds: [embed]
@@ -46,31 +48,31 @@ export default {
     },
 
     async executeChatInput(interaction,i18next) {
-        //console.log(interaction.client);
-        const embed = {
-            color: 0x3399ff,
-            author: {
+        const language = await getLang(interaction.guildId);
+
+        const embed = new EmbedBuilder()
+            .setColor(Number(process.env.CALC))
+            .setAuthor({
                 name: "Pong 🏓",
-                icon_url: `${interaction.client.user.displayAvatarURL({size: 64})}`
-            },
-            fields: [
+                iconURL: interaction.client.user.displayAvatarURL({size: 64})
+            })
+            .setFields([
                 {
-                    name: i18next.t("ping.fields.uptime"),
+                    name: i18next.t("ping.fields.uptime",{lng: language}),
                     value: codeBlock(`[${calculateTime(Math.round(process.uptime()))}]`),
                     inline: true
                 },
                 {
-                    name: i18next.t("ping.fields.latency"),
+                    name: i18next.t("ping.fields.latency",{lng: language}),
                     value: codeBlock(`${interaction.client.ws.ping}ms`),
                     inline: true
                 }
-            ],
-            footer: {
+            ])
+            .setFooter({
                 text: interaction.user.tag,
-                icon_url: interaction.user.displayAvatarURL({size: 64})
-            },
-            timestamp: new Date().toISOString()
-        }
+                iconURL: interaction.user.displayAvatarURL({size:64})
+            })
+            .setTimestamp(new Date())
 
         await interaction.reply({
             embeds: [embed]
@@ -78,11 +80,10 @@ export default {
     },
 
     registerApplicationCommands(commands) {
-        commands.push(
-            {
-                name: this.name,
-                description: this.description,
-            }
+        commands.push(new SlashCommandBuilder()
+            .setName(this.name)
+            .setDescription(this.description)
+            .setContexts([0,2])
         );
     }
 }

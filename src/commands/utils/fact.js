@@ -1,52 +1,55 @@
-import { codeBlock } from "discord.js";
-import i18next from "i18next";
+import { codeBlock, Embed, EmbedBuilder, SlashCommandBuilder } from "discord.js";
+import { getLang } from "../../../function/getLang.js";
 
 export default {
     name: "fact",
     description: "Phân tích 1 số ra thừa số nguyên tố",
-    
-    async executeMessage(message,args,i18next) {
+
+    async executeMessage(message, args, i18next) {
         const number = Number(args[0]);
+        const language = await getLang(message.guild.id)
 
         if (number > 9007199254740991) {
-            await message.channel.send(i18next.t("fact.error.numberTooLarge"));
-            return;
+            return message.channel.send(i18next.t("fact.error.numberTooLarge",{lng: language}));
+        }
+        else if (isNaN(number)) {
+            return message.channel.send(i18next.t("fact.error.isNotInteger",{lng: language}))
         }
 
         const factors = primeFactorization(number);
         const formattedResult = formatFactors(factors);
 
-        const embed = {
-            color: 0x3399ff,
-            title: i18next.t("fact.title"),
-            fields: [
+        const embed = new EmbedBuilder()
+            .setColor(Number(process.env.CALC))
+            .setTitle(i18next.t("fact.title",{lng: language}))
+            .setFields([
                 {
-                    name: i18next.t("fact.fields.numberInput"),
+                    name: i18next.t("fact.fields.numberInput",{lng: language}),
                     value: codeBlock(number)
                 },
                 {
-                    name: i18next.t("fact.fields.resultOutput"),
+                    name: i18next.t("fact.fields.resultOutput",{lng: language}),
                     value: codeBlock(formattedResult)
                 }
-            ],
-            footer: {
+            ])
+            .setFooter({
                 text: message.author.username,
-                icon_url: message.author.displayAvatarURL()
-            },
-            timestamp: new Date().toISOString()
-        };
+                iconURL: message.author.displayAvatarURL()
+            })
+            .setTimestamp(new Date())
 
         await message.channel.send({
             embeds: [embed]
         });
     },
 
-    async executeChatInput(interaction,i18next) {
+    async executeChatInput(interaction, i18next) {
         const number = interaction.options.getNumber("input");
+        const language = await getLang(interaction.guildId)
 
         if (number > 9007199254740991) {
             await interaction.reply({
-                content: i18next.t("fact.error.numberTooLarge"),
+                content: i18next.t("fact.error.numberTooLarge",{lng: language}),
                 ephemeral: true
             });
             return;
@@ -57,25 +60,24 @@ export default {
         const factors = primeFactorization(number);
         const formattedResult = formatFactors(factors);
 
-        const embed = {
-            color: 0x3399ff,
-            title: i18next.t("fact.title"),
-            fields: [
+        const embed = new EmbedBuilder()
+            .setColor(Number(process.env.CALC))
+            .setTitle(i18next.t("fact.title",{lng: language}))
+            .setFields([
                 {
-                    name: i18next.t("fact.fields.numberInput"),
+                    name: i18next.t("fact.fields.numberInput",{lng: language}),
                     value: codeBlock(number)
                 },
                 {
-                    name: i18next.t("fact.fields.resultOutput"),
+                    name: i18next.t("fact.fields.resultOutput",{lng: language}),
                     value: codeBlock(formattedResult)
                 }
-            ],
-            footer: {
+            ])
+            .setFooter({
                 text: interaction.user.tag,
-                icon_url: interaction.user.displayAvatarURL()
-            },
-            timestamp: new Date().toISOString()
-        };
+                iconURL: interaction.user.displayAvatarURL()
+            })
+            .setTimestamp(new Date())
 
         await interaction.editReply({
             embeds: [embed]
@@ -83,18 +85,16 @@ export default {
     },
 
     registerApplicationCommands(commands) {
-        commands.push({
-            name: this.name,
-            description: this.description,
-            options: [
-                {
-                    required: true,
-                    name: "input",
-                    type: 10,
-                    description: "Input Here"
-                }
-            ]
-        })
+        commands.push(new SlashCommandBuilder()
+            .setName(this.name)
+            .setDescription(this.description)
+            .setContexts([0,2])
+            .addNumberOption(option =>
+                option.setName("input")
+                    .setDescription("Input here")
+                    .setRequired(true)
+            )
+        )
     }
 }
 

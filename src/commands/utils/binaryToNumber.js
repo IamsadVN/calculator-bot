@@ -1,4 +1,5 @@
-import { codeBlock } from "discord.js";
+import { codeBlock, Embed, EmbedBuilder, SlashCommandBuilder } from "discord.js";
+import { getLang } from "../../../function/getLang.js";
 
 function binToNum(str) {
     let result = 0;
@@ -22,31 +23,31 @@ export default {
 
     async executeMessage(message,args,i18next) {
         const result = binToNum(args[0]);
+        const language = await getLang(message.guild.id);
 
         if (result === "error") {
-            await message.channel.send(i18next.t("binaryToNumber.error.invalidBinary"));
+            await message.channel.send(i18next.t("binaryToNumber.error.invalidBinary",{lng: language}));
             return;
         }
 
-        const embed = {
-            color: 0x3399ff,
-            title: i18next.t("binaryToNumber.title"),
-            fields: [
+        const embed = new EmbedBuilder()
+            .setColor(Number(process.env.CALC))
+            .setTitle(i18next.t("binaryToNumber.title",{lng: language}))
+            .setFields([
                 {
-                    name: i18next.t("binaryToNumber.fields.binaryInput"),
+                    name: i18next.t("binaryToNumber.fields.binaryInput",{lng: language}),
                     value: codeBlock(args[0])
                 },
                 {
-                    name: i18next.t("binaryToNumber.resultOutput"),
+                    name: i18next.t("binaryToNumber.fields.resultOutput",{lng: language}),
                     value: codeBlock(result)
                 }
-            ],
-            footer: {
+            ])
+            .setFooter({
                 text: message.author.username,
-                icon_url: message.author.displayAvatarURL()
-            },
-            timestamp: new Date().toISOString()
-        };
+                iconURL: message.author.displayAvatarURL({size:64})
+            })
+            .setTimestamp(new Date())
 
         await message.channel.send({
             embeds: [embed]
@@ -55,34 +56,34 @@ export default {
 
     async executeChatInput(interaction,i18next) {
         const result = binToNum(interaction.options.getString("input"));
+        const language = await getLang(interaction.guildId)
 
         if (result === "error") {
             await interaction.reply({
-                content: i18next.t("binaryToNumber.error.invalidBinary"),
+                content: i18next.t("binaryToNumber.error.invalidBinary",{lng: language}),
                 ephemeral: true
             });
             return;
         }
 
-        const embed = {
-            color: 0x3399ff,
-            title: i18next.t("binaryToNumber.title"),
-            fields: [
+        const embed = new EmbedBuilder()
+            .setColor(Number(process.env.CALC))
+            .setTitle(i18next.t("binaryToNumber.title",{lng: language}))
+            .setFields([
                 {
-                    name: i18next.t("binaryToNumber.fields.binaryInput"),
+                    name: i18next.t("binaryToNumber.fields.binaryInput",{lng: language}),
                     value: codeBlock(interaction.options.getString("input"))
                 },
                 {
-                    name: i18next.t("binaryToNumber.fields.resultOutput"),
+                    name: i18next.t("binaryToNumber.fields.resultOutput",{lng: language}),
                     value: codeBlock(result)
                 }
-            ],
-            footer: {
+            ])
+            .setFooter({
                 text: interaction.user.tag,
-                icon_url: interaction.user.displayAvatarURL()
-            },
-            timestamp: new Date().toISOString()
-        };
+                iconURL: interaction.user.displayAvatarURL({size:64})
+            })
+            .setTimestamp(new Date())
 
         await interaction.reply({
             embeds: [embed]
@@ -90,17 +91,15 @@ export default {
     },
 
     registerApplicationCommands(commands) {
-        commands.push({
-            name: this.name,
-            description: this.description,
-            options: [
-                {
-                    required: true,
-                    name: "input",
-                    type: 3,
-                    description: "Input here"
-                }
-            ]
-        })
+        commands.push(new SlashCommandBuilder()
+            .setName(this.name)
+            .setDescription(this.description)
+            .setContexts([0,2])
+            .addStringOption(option => 
+                option.setName("input")
+                    .setDescription("Nhập vào dãy nhị phân")
+                    .setRequired(true)
+            )
+        )
     }
 }
