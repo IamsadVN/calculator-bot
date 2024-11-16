@@ -100,6 +100,7 @@ export default {
             .setName(this.name)
             .setDescription(this.description)
             .setContexts([0,2])
+            .setIntegrationTypes([0,1])
             .addStringOption(option => 
                 option.setName("input")
                     .setDescription("Hãy nhập ký tự vào đây")

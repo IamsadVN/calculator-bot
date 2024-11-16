@@ -1,4 +1,3 @@
-import { getLang } from "../../../function/getLang.js";
 import { commandLog } from "../../../function/log.js";
 import i18next from "i18next";
 

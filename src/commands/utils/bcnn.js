@@ -111,6 +111,7 @@ export default {
             .setName(this.name)
             .setDescription(this.description)
             .setContexts([0,2])
+            .setIntegrationTypes([0,1])            
             .addNumberOption(option =>
                 option.setName("number_1")
                     .setDescription("Con số thứ nhất")

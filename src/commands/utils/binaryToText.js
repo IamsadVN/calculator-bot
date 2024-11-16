@@ -84,7 +84,8 @@ export default {
         commands.push(new SlashCommandBuilder()
             .setName(this.name)
             .setDescription(this.description)
-            .setContexts([0, 2])
+            .setContexts([0,2])
+            .setIntegrationTypes([0,1])
             .addStringOption(option =>
                 option.setName("input")
                     .setDescription("Nhập một dãy nhị phân")

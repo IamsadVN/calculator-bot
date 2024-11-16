@@ -75,6 +75,7 @@ export default {
             .setName(this.name)
             .setDescription(this.description)
             .setContexts([0,2])
+            .setIntegrationTypes([0,1])
             .addNumberOption(option =>
                 option.setName("input")
                     .setDescription("Vui lòng cho 1 con số vào đây")

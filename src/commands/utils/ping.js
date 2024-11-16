@@ -1,4 +1,4 @@
-import { codeBlock, EmbedBuilder, SlashCommandBuilder } from "discord.js";
+import { codeBlock, EmbedBuilder, SlashCommandBuilder } from "@discordjs/builders";
 import { getLang } from "../../../function/getLang.js";
 
 function calculateTime(inputSeconds) {
@@ -84,6 +84,7 @@ export default {
             .setName(this.name)
             .setDescription(this.description)
             .setContexts([0,2])
+            .setIntegrationTypes([0,1])
         );
     }
 }

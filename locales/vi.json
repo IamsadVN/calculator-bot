@@ -146,5 +146,15 @@
             "amountInput": "Số lượng số ngẫu nhiên:",
             "resultOutput": "Kết quả:"
         }
+    },
+    "average": {
+        "title": "Trung bình cộng",
+        "error": {
+            "wrongInput": "Có vẻ như bạn đã nhập sai cách, vui lòng chọn 1 trong 2 cách nhập"
+        },
+        "fields": {
+            "argsInput": "Những con số:",
+            "resultOutput":"Kết quả:"
+        }
     }
 }
