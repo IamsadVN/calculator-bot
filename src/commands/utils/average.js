@@ -8,21 +8,21 @@ export default {
 
     async executeMessage(message,args,i18next) {
         const language = await getLang(message.guild.id);
-        let numbers = new Array();
+        let numbers = [];
 
         //Nếu arr có length > 1 thì có nghĩa: "1 2 3 4 5 6"
         if (args.length > 1) {
-            args.forEach((arg) => {
+            for (const arg of args) {
                 if (arg.includes(",")) {
-                    //Nếu nhập cả 2 loại thì bỏ
-                    return message.channel.send({
+                    await message.channel.send({
                         content: i18next.t("average.error.wrongInput",{lng: language})
                     });
+                    break;
                 }
                 else {
                     numbers.push(Number(arg));
                 }
-            })
+            }
         }
         //Nếu không phải > 1 thì có nghĩa: "1,2,3,4,5,6"
         else {
@@ -37,7 +37,7 @@ export default {
             .setFields([
                 {
                     name: i18next.t("average.fields.argsInput",{lng:language}),
-                    value: codeBlock(args[0])
+                    value: codeBlock(numbers)
                 },
                 {
                     name: i18next.t("average.fields.resultOutput",{lng: language}),
@@ -57,29 +57,17 @@ export default {
 
     async executeChatInput(interaction,i18next) {
         const language = await getLang(interaction.guildId);
-        /**
-         * @type {string}
-         */
-        const input = interaction.options.getString("input",true).trim();
-        let numbers = new Array();
 
-        if (input.includes(",") && input.includes(" ")) {
-            return interaction.reply({
-                content: i18next.t("average.error.wrongInput",{lng: language}),
-                ephemeral: true
-            })
+        const input = interaction.options.getString("input",true);
+        let numbers = [];
+
+        //Co nghia la "1,   2,, 354 ,4,3 "
+        if (input.includes(",")) {
+            numbers = input.split(",").map((num) => Number(num.trim()));
         }
+        //Co nghia la "       1    2     3     4      "
         else {
-            if (input.includes(",")) {
-                input.split(",").forEach((num) => {
-                    numbers.push(num);
-                })
-            }
-            else if (input.includes(" ")) {
-                input.split(" ").forEach((num) => {
-                    numbers.push(num);
-                })
-            }
+            numbers = input.trim().split(/ +/g).map((num) => Number(num));
         }
 
         const embed = new EmbedBuilder()
@@ -119,11 +107,6 @@ export default {
     }
 }
 
-/**
- * Get the average of these number
- * @param {number[]} numbers An Array of numbers
- * @returns 
- */
 function getAverage(numbers) {
     let result = 0;
     numbers.forEach((number) => {

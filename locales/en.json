@@ -146,5 +146,15 @@
             "amountInput": "Number of random numbers:",
             "resultOutput": "Result:"
         }
+    },
+    "average": {
+        "title": "Arithmetic Mean",
+        "error": {
+            "wrongInput": "It seems you entered incorrectly"
+        },
+        "fields": {
+            "argsInput": "The numbers:",
+            "resultOutput": "Result:"
+        }
     }
 }

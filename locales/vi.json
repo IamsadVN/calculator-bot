@@ -150,7 +150,7 @@
     "average": {
         "title": "Trung bình cộng",
         "error": {
-            "wrongInput": "Có vẻ như bạn đã nhập sai cách, vui lòng chọn 1 trong 2 cách nhập"
+            "wrongInput": "Có vẻ như bạn đã nhập sai cách"
         },
         "fields": {
             "argsInput": "Những con số:",
