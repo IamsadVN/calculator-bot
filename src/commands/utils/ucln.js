@@ -1,6 +1,6 @@
 import { codeBlock, EmbedBuilder, SlashCommandBuilder } from "@discordjs/builders";
-import { getLang } from "../../../function/getLang.js";
-import { limitStrLength } from "../../../function/limitStrLength.js";
+import { getLang } from "../../utils/getLang.js";
+import { limitStrLength } from "../../utils/limitStrLength.js";
 
 export default {
     name: "ucln",

@@ -1,4 +1,4 @@
-import { errorLog, infoLog } from "../../../function/log.js"
+import { errorLog, infoLog } from "../../utils/log.js"
 import { WebhookClient, codeBlock } from "discord.js";
 
 export default {

@@ -1,6 +1,6 @@
 import { codeBlock, Embed, EmbedBuilder, SlashCommandBuilder } from "discord.js";
 import * as math from "mathjs";
-import { getLang } from "../../../function/getLang.js";
+import { getLang } from "../../utils/getLang.js";
 
 export default {
     name: "hpt",

@@ -1,6 +1,6 @@
 import { REST, Routes } from "discord.js";
 import { readdir } from "fs/promises";
-import { infoLog } from "../../function/log.js";
+import { infoLog } from "./log.js";
 
 //Hàm để load event
 export async function loadEvents(client) {

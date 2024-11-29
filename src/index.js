@@ -1,7 +1,7 @@
 import { config } from "dotenv";
 import { Client, GatewayIntentBits, Collection } from "discord.js";
 import { loadEvents, loadCommands } from "./utils/loader.js";
-import { errorLog, infoLog } from "../function/log.js"
+import { errorLog, infoLog } from "./utils/log.js"
 import mongoose from "mongoose";
 import i18next from "i18next";
 import Backend from "i18next-fs-backend";

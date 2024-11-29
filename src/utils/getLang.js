@@ -1,4 +1,4 @@
-import langOfEachGuild from "../schemas/LangOfGuild.js"
+import langOfEachGuild from "../../schemas/LangOfGuild.js"
 
 /**
  * 

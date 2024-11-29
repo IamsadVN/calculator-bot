@@ -1,5 +1,5 @@
 import { codeBlock, Embed, EmbedBuilder, SlashCommandBuilder } from "discord.js";
-import { getLang } from "../../../function/getLang.js";
+import { getLang } from "../../utils/getLang.js";
 
 export default {
     name: "fact",

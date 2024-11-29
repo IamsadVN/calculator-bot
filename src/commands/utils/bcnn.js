@@ -1,5 +1,5 @@
 import { codeBlock, EmbedBuilder, SlashCommandBuilder } from "discord.js";
-import { getLang } from "../../../function/getLang.js";
+import { getLang } from "../../utils/getLang.js";
 
 function getBcnn(n1,n2) {
     const backup_n1 = n1;

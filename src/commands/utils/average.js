@@ -1,5 +1,5 @@
 import { codeBlock, EmbedBuilder, SlashCommandBuilder } from "@discordjs/builders";
-import { getLang } from "../../../function/getLang.js"
+import { getLang } from "../../utils/getLang.js"
 
 export default {
     name: "average",

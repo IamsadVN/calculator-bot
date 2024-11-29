@@ -1,5 +1,5 @@
 import { ActivityType } from "discord.js";
-import { infoLog } from "../../../function/log.js";
+import { infoLog } from "../../utils/log.js";
 
 export default {
     name: "ready",

@@ -1,4 +1,4 @@
-import { commandLog } from "../../../function/log.js";
+import { commandLog } from "../../utils/log.js";
 import i18next from "i18next";
 
 export default {

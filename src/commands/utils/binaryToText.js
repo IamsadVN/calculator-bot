@@ -1,5 +1,5 @@
 import { codeBlock, EmbedBuilder, SlashCommandBuilder } from "discord.js";
-import { getLang } from "../../../function/getLang.js";
+import { getLang } from "../../utils/getLang.js";
 
 function bitToText(str) {
     return [...str.split(/ +/g)].map((x) => String.fromCharCode(parseInt(x, 2))).join("");
