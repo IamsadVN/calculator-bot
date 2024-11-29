@@ -109,13 +109,11 @@
     "ucln": {
         "description": "Tìm ước chung lớn nhất của 2 số",
         "error": {
-            "isInvalidNumber": "Một trong 2 số phải lớn hơn 0",
-            "isNotInteger": "Một trong 2 số phải là số nguyên!"
+            "isInvalidInput": "Có vẻ như bạn đã nhập sai cách, vui lòng thử lại"
         },
         "title": "Ước Chung Lớn Nhất",
         "fields": {
-            "numberInput1": "Số thứ nhất:",
-            "numberInput2": "Số thứ hai:",
+            "numbersInput": "Các con số:",
             "resultOutput": "Kết quả:"
         }
     },

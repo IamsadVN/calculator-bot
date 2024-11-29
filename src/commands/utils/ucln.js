@@ -1,5 +1,6 @@
 import { codeBlock, EmbedBuilder, SlashCommandBuilder } from "@discordjs/builders";
 import { getLang } from "../../../function/getLang.js";
+import { limitStrLength } from "../../../function/limitStrLength.js";
 
 export default {
     name: "ucln",
@@ -7,19 +8,35 @@ export default {
     description: "Tìm Ước Chung Lớn nhất của 2 số",
 
     async executeMessage(message,args,i18next) {
-        const number1 = Number(args[0]);
-        const number2 = Number(args[1]);
         const language = await getLang(message.guild.id);
+        let numbers = [];
 
-        if (number1 <= 0 || number2 <= 0) {
-            return message.channel.send({
-                content: i18next.t("ucln.error.isInvalidNumber",{lng: language})
-            });
+        if (args.length > 1) {
+            for (const arg of args) {
+                if (arg.includes(",")) {
+                    return message.channel.send({
+                        content: i18next.t("ucln.error.isInvalidInput",{lng:language})
+                    });
+                }
+                else {
+                    //numbers.push(Number(arg));
+                    if (arg < 0) continue;
+                    if (!Number.isInteger(Number(arg))) continue;
+                    numbers.push(Number(arg));
+                }
+            }
         }
-        else if (isNaN(number1) || isNaN(number2)) {
-            return message.channel.send({
-                content: i18next.t("ucln.error.isNotInteger",{lng: language})
-            })
+        else {
+            const temp = args[0].split(",");
+            for (const arg of temp) {
+                const current = arg.trim();
+                if (!current) continue;
+                const number = Number(current);
+                if (isNaN(number)) continue;
+                if (number < 0) continue;
+                if (!Number.isInteger(number)) continue;
+                numbers.push(number);
+            }
         }
 
         const embed = new EmbedBuilder()
@@ -27,18 +44,12 @@ export default {
             .setColor(Number(process.env.CALC))
             .setFields([
                 {
-                    name: i18next.t("ucln.fields.numberInput1",{lng: language}),
-                    value: codeBlock(number1),
-                    inline: true
-                },
-                {
-                    name: i18next.t("ucln.fields.numberInput2",{lng: language}),
-                    value: codeBlock(number2),
-                    inline: true
+                    name: i18next.t("ucln.fields.numbersInput",{lng: language}),
+                    value: codeBlock(limitStrLength(numbers.join(","),1014))
                 },
                 {
                     name: i18next.t("ucln.fields.resultOutput",{lng: language}),
-                    value: codeBlock(gcd(number1,number2))
+                    value: codeBlock(gcd(numbers))
                 }
             ])
             .setFooter({
@@ -51,16 +62,26 @@ export default {
     },
 
     async executeChatInput(interaction,i18next) {
-        const number1 = interaction.options.getNumber("number_1",true);
-        const number2 = interaction.options.getNumber("number_2",true);
-
+        const args = interaction.options.getString("numbers",true).split(",");
         const language = await getLang(interaction.guildId);
 
-        if (number1 <= 0 || number2 <= 0) {
+        const numbers = [];
+
+        if (args.length < 2) {
             return interaction.reply({
-                content: i18next.t("ucln.error.isInvalidNumber",{lng: language}),
-                emphermal: true
+                content: i18next.t("ucln.error.isInvalidInput"),
+                ephemeral: true
             })
+        }
+
+        for (const arg of args) {
+            const current = arg.trim();
+            if (!current) continue;
+            const number = Number(current);
+            if (isNaN(number)) continue;
+            if (number < 0) continue;
+            if (!Number.isInteger(number)) continue;
+            numbers.push(number);
         }
 
         const embed = new EmbedBuilder()
@@ -68,18 +89,12 @@ export default {
             .setColor(Number(process.env.CALC))
             .setFields([
                 {
-                    name: i18next.t("ucln.fields.numberInput1",{lng: language}),
-                    value: codeBlock(number1),
-                    inline: true
-                },
-                {
-                    name: i18next.t("ucln.fields.numberInput2",{lng: language}),
-                    value: codeBlock(number2),
-                    inline: true
+                    name: i18next.t("ucln.fields.numbersInput",{lng: language}),
+                    value: codeBlock(limitStrLength(numbers.join(","),1014))
                 },
                 {
                     name: i18next.t("ucln.fields.resultOutput",{lng: language}),
-                    value: codeBlock(gcd(number1,number2))
+                    value: codeBlock(gcd(numbers))
                 }
             ])
             .setFooter({
@@ -99,24 +114,32 @@ export default {
             .setDescription(this.description)
             .setContexts([0,2])
             .setIntegrationTypes([0,1])
-            .addNumberOption(option =>
-                option.setName("number_1")
+            .addStringOption(option =>
+                option.setName("numbers")
                     .setRequired(true)
-                    .setDescription("Cho con số thứ nhất vào đây")
-            )
-            .addNumberOption(option =>
-                option.setName("number_2")
-                    .setRequired(true)
-                    .setDescription("Cho con số thứ hai vào đây")
+                    .setDescription("Cho nhiều con số vào đây")
+                    .setMaxLength(3_000)
             )
         )
     }
 }
 
-function gcd(a,b) {
-    while(a !== b) {
-        if (a > b) a=a-b;
-        else b=b-a;
+function gcd(numbers) {
+    let result = numbers[0];
+
+    for(let i=1;i < numbers.length;i++) {
+        const current = numbers[i];
+        let temp = Math.min(result,current);
+
+        while (temp > 0) {
+            if (current % temp === 0 && result % temp === 0) {
+                break;
+            }
+
+            temp--;
+        }
+        result = temp;
     }
-    return a;
+
+    return result;
 }

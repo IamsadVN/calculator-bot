@@ -63,7 +63,10 @@ export default {
 
         //Co nghia la "1,   2,, 354 ,4,3 "
         if (input.includes(",")) {
-            numbers = input.split(",").map((num) => Number(num.trim()));
+            numbers = input
+                .split(",").map((num) => num.trim())
+                .filter((num) => Boolean(num))
+                .map((num) => Number(num));
         }
         //Co nghia la "       1    2     3     4      "
         else {

@@ -18,7 +18,7 @@ export default {
             await command.executeChatInput?.(interaction,i18next);
 
             if (interaction.inCachedGuild()) commandLog(`${interaction.guild} / ${interaction.user.tag}`,command.name,"Slash Command");
-            else commandLog(`Private Chat / ${interaction.user.tag}`,command.name,"Slash Command");
+            else commandLog(`User Install / ${interaction.user.tag}`,command.name,"Slash Command");
             
         }
         else if (interaction.isAutocomplete()) 

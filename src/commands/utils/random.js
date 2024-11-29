@@ -151,12 +151,12 @@ function getRandValue(type, min, max, amount) {
     else if (type === "integer") {
         if (min === 0) {
             for (let i = 1; i <= amount; i++) {
-                arrResult.push(Math.round(Math.random() * max));
+                arrResult.push(Math.floor(Math.random() * max));
             }
         }
         else {
             for (let i = 1; i <= amount; i++) {
-                arrResult.push(Math.round(Math.random() * (max - min + 1) + min));
+                arrResult.push(Math.floor(Math.random() * (max - min + 1) + min));
             }
         }
     }
@@ -170,5 +170,7 @@ function getRandValue(type, min, max, amount) {
  * @returns {string}
  */
 function formattedNumber(numbers) {
-    return numbers.map(number => Number(number.toFixed(3)).toLocaleString('vi-VN')).join("; ");
-}
+    return numbers.map(number => Number(number.toFixed(3)).toLocaleString("en-US",{
+        useGrouping: false
+    })).join(", ");
+}   
