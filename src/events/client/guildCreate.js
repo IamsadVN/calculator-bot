@@ -4,7 +4,7 @@ export default {
     name: "guildCreate",
     once: false,
 
-    async execute(client) {
+    async execute(guild) {
         const webhook = new WebhookClient({
             url: process.env.WEBHOOK_GUILDJOIN
         });
@@ -24,21 +24,21 @@ export default {
             fields: [
                 {
                     name: "Tên máy chủ:",
-                    value: codeBlock(client.name)
+                    value: codeBlock(guild.name)
                 },
                 {
                     name: "Member:",
-                    value: codeBlock(client.memberCount),
+                    value: codeBlock(guild.memberCount),
                     inline: true
                 },
                 {
                     name: "Language:",
-                    value: codeBlock(client.preferredLocale),
+                    value: codeBlock(guild.preferredLocale),
                     inline: true
                 },
                 {
                     name: "Owner ID:",
-                    value: codeBlock(client.ownerId)
+                    value: codeBlock(guild.ownerId)
                 },
                 {
                     name: "Date Join:",

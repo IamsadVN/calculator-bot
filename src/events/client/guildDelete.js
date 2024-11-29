@@ -1,53 +1,48 @@
 import { WebhookClient, codeBlock } from "discord.js"
 
 export default {
-    name: "guildMemberRemove",
+    name: "guildDelete",
     once: false,
-
-    async execute(client) {
+    
+    async execute(guild) {
         const webhook = new WebhookClient({
-            url: process.env.WEBHOOK_GUILDLEFT,
+            url: process.env.WEBHOOK_GUILDLEFT
         });
-
-        const dateJoin = new Date(client.guild.joinedTimestamp);
+                
+        const dateJoin = new Date(guild.joinedTimestamp);
         const formattedDate = dateJoin.toLocaleDateString('vi-VN', {
             weekday: 'long',
             year: 'numeric',
             month: 'long',
             day: 'numeric',
         }) + "\n" + dateJoin.getHours() + "h" + " "
-           + dateJoin.getMinutes() + "m" + " "
-           + dateJoin.getSeconds() + "s";
-
+        + dateJoin.getMinutes() + "m" + " "
+        + dateJoin.getSeconds() + "s";
+        
         const embed = {
             color: 0x808080,
             title: "Đã rời một Guild nào đó...",
-            description: `**Tên Guild:** ${codeBlock(`${client.guild.name}`)}`,
+            description: `**Tên Guild:** ${codeBlock(`${guild.name}`)}`,
             fields: [
                 {
                     name: "Member:",
-                    value: `${codeBlock(client.guild.memberCount)}`,
-                    inline: true
-                },
-                {
-                    name: "Biệt danh:",
-                    value: `${codeBlock(client.nickname || "Không có")}`,
+                    value: `${codeBlock(guild.memberCount)}`,
                     inline: true
                 },
                 {
                     name: "Owner:",
-                    value: `${codeBlock(client.guild.ownerId)}`,
-                    inline: false
+                    value: `${codeBlock(guild.ownerId)}`,
+                    inline: true
                 },
                 {
                     name: "Ngôn ngữ:",
-                    value: `${codeBlock(client.guild.preferredLocale)}`,
-                    inline: true
+                    value: `${codeBlock(guild.preferredLocale)}`,
+                    inline: false
                 },
                 {
                     name: "Join at:",
                     value: `${codeBlock(formattedDate)}`,
-                    inline: false
+                    inline: true
                 }
             ],
             footer: {
@@ -55,9 +50,9 @@ export default {
             },
             timestamp: new Date().toISOString()
         }
-
+        
         webhook.send({
-            embeds: [embed]
+            embeds: [embed],
         });
     }
 }
