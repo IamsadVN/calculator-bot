@@ -19,10 +19,10 @@ export default {
                     });
                 }
                 else {
-                    //numbers.push(Number(arg));
-                    if (arg < 0) continue;
-                    if (!Number.isInteger(Number(arg))) continue;
-                    numbers.push(Number(arg));
+                    const current = Number(arg);
+                    if (current < 0) continue;
+                    if (!Number.isInteger(current)) continue;
+                    numbers.push(current);
                 }
             }
         }
@@ -57,6 +57,7 @@ export default {
                 iconURL: message.author.displayAvatarURL({size: 64})
             })
             .setTimestamp(new Date())
+        
         
         await message.channel.send({embeds: [embed]});
     },

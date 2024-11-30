@@ -1,11 +1,11 @@
 {
     "hpt": {
-        "description": "System of quadratic equations in two variables",
+        "description": "Two-Variable Linear Equation System",
         "error": {
-            "wrongEquation": "It seems like you entered it incorrectly, please enter it again!",
-            "diffVariable": "Two equations do not have the same variable names!"
+            "wrongEquation": "It seems you entered incorrectly, please re-enter!",
+            "diffVariable": "2 Equations do not have the same variable names!"
         },
-        "title": "System of linear equations in two variables",
+        "title": "Two-Variable Linear Equation System",
         "fields": {
             "inputBlock1": "Equation 1:",
             "inputBlock2": "Equation 2:",
@@ -27,24 +27,24 @@
                 }
             ]
         },
-        "changedLang": "Language has been successfully changed to `{{language}}`!"
+        "changedLang": "Language changed to `{{language}}` successfully!"
     },
 
     "fact": {
-        "description": "Prime factorization of a number",
-        "error": {
-            "numberTooLarge": "The number is too large to process, please try again!",
+        "description": "Analyze a number into prime factors",
+        "error":{
+            "numberTooLarge": "The number is too large to perform the command, please try again!",
             "isNotInteger": "The number provided is not an integer!"
-        },
-        "title": "Prime factorization of a number",
+        }, 
+        "title": "Analyze a Number into Prime Factors",
         "fields": {
             "numberInput": "Number:",
             "resultOutput": "Result:"
         }
     },
-    
+
     "ping": {
-        "description": "Check the response speed of Casio fx-580VN X",
+        "description": "Check response speed of Casio fx-580VN X",
         "fields": {
             "uptime": "Uptime",
             "latency": "Latency"
@@ -52,70 +52,66 @@
     },
 
     "numberToBinary": {
-        "description": "Convert a number to binary",
-        "title": "Convert a number to binary",
+        "description": "Convert a number to binary code",
+        "title": "Convert a Number to Binary Code",
         "fields": {
             "numberInput": "Number:",
             "resultOutput": "Result:"
         }
     },
-
+    
     "binaryToText": {
         "description": "Convert a binary string to text",
-        "title": "Binary to text",
+        "title": "Binary Code to Text",
         "error": {
             "isInvalidBinary": "Invalid binary string!"
         },
         "fields": {
-            "binaryInput": "Binary code:",
+            "binaryInput": "Binary Code:",
             "resultOutput": "Result:"
         }
     },
-
+    
     "binaryToNumber": {
-        "description": "Convert a binary string to a number",
+        "description": "Convert a binary string to digits",
         "error": {
-            "invalidBinary": "Please enter a valid binary string"
+            "invalidBinary": "Please enter a valid binary sequence"
         },
-        "title": "Binary to number",
+        "title": "Binary Code to Number",
         "fields": {
-            "binaryInput": "Binary code:",
+            "binaryInput": "Binary Code:",
             "resultOutput": "Result:"
         }
     },
 
     "bcnn": {
-        "description": "Find the least common multiple of two numbers",
+        "description": "Find the least common multiple of 2 numbers",
         "error": {
-            "isInvalidNumber": "One of the numbers must be greater than 0!",
-            "isNotInteger": "One of the numbers must be an integer!"
+            "isInvalidInput": "It seems you entered incorrectly, please try again"
         },
-        "title": "Least common multiple",
+        "title": "Least Common Multiple",
         "fields": {
-            "numberInput1": "First number:",
-            "numberInput2": "Second number:",
+            "numbersInput": "Numbers:",
             "resultOutput": "Result:"
         }
     },
 
     "textToBinary": {
-        "description": "Convert text to binary",
-        "title": "Text to binary",
+        "description": "Convert text to binary code",
+        "title": "Text to Binary Code",
         "fields": {
             "textInput": "Text:",
             "resultOutput": "Result:"
         }
     },
     "ucln": {
-        "description": "Calculates the greatest common divisor of 2 numbers",
+        "description": "Find the greatest common divisor of 2 numbers",
         "error": {
-            "isInvalidNumber": "One of the two numbers must be greater than 0.",
-            "isNotInteger": "One of the numbers must be an integer!"
+            "isInvalidInput": "It seems you entered incorrectly, please try again"
         },
         "title": "Greatest Common Divisor",
         "fields": {
-            "numberInput1": "First number:",
-            "numberInput2": "Second number:",
+            "numbersInput": "Numbers:",
             "resultOutput": "Result:"
         }
     },
@@ -123,7 +119,7 @@
         "autocomplete": {
             "choices": [
                 {
-                    "name": "Decimal",
+                    "name": "Decimal Number",
                     "value": "decimal"
                 },
                 {
@@ -133,17 +129,17 @@
             ]
         },
         "error": {
-            "amountTooLarge": "The amount to randomize is too large, it cannot exceed 50!",
-            "maxTooLarge": "The maximum constraint is too large to randomize, it cannot exceed 1 billion!",
-            "minGreaterThanMax": "The minimum constraint cannot be greater than the maximum constraint!",
-            "onlySupportSlashCommand": "Sorry, this command only supports Slash Command. Please switch to using Slash Command."
+            "amountTooLarge": "The number of randoms needed is too large, cannot be more than 50!",
+            "maxTooLarge": "Maximum constraint is too large to Random, cannot be greater than 1 billion!",
+            "minGreaterThanMax": "Minimum constraint cannot be greater than maximum constraint!",
+            "onlySupportSlashCommand": "Sorry, the command only supports Slash Command. Please switch to using Slash Command"
         },
         "title": "Random Number",
         "fields": {
-            "typeInput": "Type of random number:",
-            "minInput": "Minimum constraint:",
-            "maxInput": "Maximum constraint:",
-            "amountInput": "Number of random numbers:",
+            "typeInput": "Random Number Type:",
+            "minInput": "Minimum Constraint:",
+            "maxInput": "Maximum Constraint:",
+            "amountInput": "Number of Random Numbers:",
             "resultOutput": "Result:"
         }
     },
@@ -153,8 +149,8 @@
             "wrongInput": "It seems you entered incorrectly"
         },
         "fields": {
-            "argsInput": "The numbers:",
-            "resultOutput": "Result:"
+            "argsInput": "Numbers:",
+            "resultOutput":"Result:"
         }
     }
 }
