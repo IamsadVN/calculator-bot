@@ -12,7 +12,7 @@ export default {
         if (number > 9007199254740991) {
             return message.channel.send(i18next.t("fact.error.numberTooLarge",{lng: language}));
         }
-        else if (isNaN(number)) {
+        else if (!Number.isInteger(number)) {
             return message.channel.send(i18next.t("fact.error.isNotInteger",{lng: language}))
         }
 
@@ -44,7 +44,7 @@ export default {
     },
 
     async executeChatInput(interaction, i18next) {
-        const number = interaction.options.getNumber("input");
+        const number = interaction.options.getInteger("input");
         const language = await getLang(interaction.guildId)
 
         if (number > 9007199254740991) {
@@ -90,7 +90,7 @@ export default {
             .setDescription(this.description)
             .setContexts([0,2])
             .setIntegrationTypes([0,1])
-            .addNumberOption(option =>
+            .addIntegerOption(option =>
                 option.setName("input")
                     .setDescription("Input here")
                     .setRequired(true)

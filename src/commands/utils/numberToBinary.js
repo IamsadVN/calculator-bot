@@ -19,6 +19,9 @@ export default {
         const number = Number(args[0]);
         const language = await getLang(message.guild.id);
 
+        if (!Number.isInteger(number)) 
+            return message.channel.send(i18next.t("numberToBinary.error.isNotInteger",{lng:language}));
+
         const embed = new EmbedBuilder()
             .setColor(Number(process.env.CALC))
             .setTitle(i18next.t("numberToBinary.title",{lng: language}))
@@ -45,7 +48,7 @@ export default {
     },
 
     async executeChatInput(interaction,i18next) {
-        const number = interaction.options.getNumber("input");
+        const number = interaction.options.getInteger("input");
         const language = await getLang(interaction.guildId);
         const embed = new EmbedBuilder()
             .setColor(Number(process.env.CALC))
@@ -76,7 +79,7 @@ export default {
             .setDescription(this.description)
             .setContexts([0,2])
             .setIntegrationTypes([0,1])
-            .addNumberOption(option =>
+            .addIntegerOption(option =>
                 option.setName("input")
                     .setDescription("Vui lòng cho 1 con số vào đây")
                     .setRequired(true)

@@ -53,6 +53,9 @@
 
     "numberToBinary": {
         "description": "Chuyển đổi 1 số thành mã nhị phân",
+        "error": {
+            "isNotInteger": "Con số đưa ra không phải là 1 số nguyên!"
+        },
         "title": "Chuyển đổi 1 số thành mã nhị phân",
         "fields": {
             "numberInput": "Con số:",
