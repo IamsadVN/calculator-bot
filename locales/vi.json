@@ -150,7 +150,105 @@
         },
         "fields": {
             "argsInput": "Những con số:",
-            "resultOutput":"Kết quả:"
+            "resultOutput": "Kết quả:"
+        }
+    },
+    "converter": {
+        "autocomplete": {
+            "categories": [
+                {
+                    "name": "Độ dài", "value": "length",
+                    "type": [
+                        { "name": "Inch -> CM", "value": "in_to_cm" },
+                        { "name": "CM -> Inch", "value": "cm_to_in" },
+                        { "name": "Feet -> M", "value": "ft_to_m" },
+                        { "name": "M -> Feet", "value": "m_to_ft" },
+                        { "name": "Yard -> M", "value": "yd_to_m" },
+                        { "name": "M -> Yard", "value": "m_to_yd" },
+                        { "name": "Dặm -> Km", "value": "mile_to_km" },
+                        { "name": "Km -> Dặm", "value": "km_to_mile" },
+                        { "name": "Hải lý -> M", "value": "nauticalmile_to_m" },
+                        { "name": "M -> Hải lý", "value": "m_to_nauticalmile" },
+                        { "name": "Parsec -> Km", "value": "pc_to_km" },
+                        { "name": "Km -> Parsec", "value": "km_to_pc" }
+                    ]
+                },
+                {
+                    "name": "Diện tích", "value": "area",
+                    "type": [
+                        { "name": "Acre -> M2", "value": "acre_to_m2" },
+                        { "name": "M2 -> Acre", "value": "m2_to_acre" }
+                    ]
+                },
+                {
+                    "name": "Thể tích", "value": "volume",
+                    "type": [
+                        { "name": "Gallon Mỹ -> Lít", "value": "gal(us)_to_l" },
+                        { "name": "Lít -> Gallon Mỹ", "value": "l_to_gal(us)" },
+                        { "name": "Gallon Anh -> Lít", "value": "gal(uk)_to_l" },
+                        { "name": "Lít -> Gallon Anh", "value": "l_to_gal(uk)" }
+                    ]
+                },
+                {
+                    "name": "Khối lượng", "value": "mass",
+                    "type": [
+                        { "name": "Ounce -> Gram", "value": "oz_to_g" },
+                        { "name": "Gram -> Ounce", "value": "g_to_oz" },
+                        { "name": "Pound -> Kg", "value": "lb_to_kg" },
+                        { "name": "Kg -> Pound", "value": "kg_to_lb" }
+                    ]
+                },
+                {
+                    "name": "Vận tốc", "value": "velocity",
+                    "type": [
+                        { "name": "Km/h -> M/s", "value": "km/h_to_m/s" },
+                        { "name": "M/s -> Km/h", "value": "m/s_to_km/h" }
+                    ]
+                },
+                {
+                    "name": "Áp suất", "value": "pressure",
+                    "type": [
+                        { "name": "Atm -> Pa",  "value": "atm_to_Pa" },
+                        { "name": "Pa -> Atm", "value": "Pa_to_atm" },
+                        { "name": "mmHg -> Pa", "value": "mmHg_to_Pa" },
+                        { "name": "Pa -> mmHg", "value": "Pa_to_mmHg" },
+                        { "name": "Kgf/cm2 -> Pa", "value": "kgf/cm2_to_Pa" },
+                        { "name": "Pa -> Kgf/cm2", "value": "Pa_to_kgf/cm2" },
+                        { "name": "Lbf/in2 -> kPa", "value": "lbf/in2_to_kPa" },
+                        { "name": "kPa -> Lbf/in2", "value": "kPa_to_lbf/in2" }
+                    ]
+                },
+                {
+                    "name": "Năng lượng", "value": "energy",
+                    "type": [
+                        { "name": "Kgf-m -> J", "value": "kgf-m_to_J" },
+                        { "name": "J -> Kgf-m", "value": "J_to_kgf-m" },
+                        { "name": "J -> Cal",  "value": "J_to_cal" },
+                        { "name": "Cal -> J", "value": "cal_to_J" }
+                    ]
+                },
+                {
+                    "name": "Công suất", "value": "power",
+                    "type": [
+                        { "name": "Hp -> kW", "value": "hp_to_kW" },
+                        { "name": "kW -> Hp", "value": "kW_to_hp" }
+                    ]
+                },
+                {
+                    "name": "Nhiệt độ", "value": "temperature",
+                    "type": [
+                        { "name": "F -> C", "value": "F_to_C" },
+                        { "name": "C -> F", "value": "C_to_F" }
+                    ]
+                }
+            ]
+        },
+        "title": "Bộ Chuyển Đổi",
+        "fields": {
+            "categoryName": "Danh mục:",
+            "typeName": "Đơn vị chuyển đổi:",
+            "valueInput": "Giá trị:",
+            "valueOutput": "Kết quả:"
         }
     }
 }

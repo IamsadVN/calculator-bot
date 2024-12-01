@@ -152,5 +152,104 @@
             "argsInput": "Numbers:",
             "resultOutput":"Result:"
         }
+    },
+    "converter": {
+        "autocomplete": {
+            "categories": [
+                {
+                    "name": "Length", "value": "length",
+                    "type": [
+                        { "name": "Inch -> CM", "value": "in_to_cm" },
+                        { "name": "CM -> Inch", "value": "cm_to_in" },
+                        { "name": "Feet -> M", "value": "ft_to_m" },
+                        { "name": "M -> Feet", "value": "m_to_ft" },
+                        { "name": "Yard -> M", "value": "yd_to_m" },
+                        { "name": "M -> Yard", "value": "m_to_yd" },
+                        { "name": "Mile -> Km", "value": "mile_to_km" },
+                        { "name": "Km -> Mile", "value": "km_to_mile" },
+                        { "name": "Nautical Mile -> M", "value": "nauticalmile_to_m" },
+                        { "name": "M -> Nautical Mile", "value": "m_to_nauticalmile" },
+                        { "name": "Parsec -> Km", "value": "pc_to_km" },
+                        { "name": "Km -> Parsec", "value": "km_to_pc" }
+                    ]
+                },
+                {
+                    "name": "Area", "value": "area",
+                    "type": [
+                        { "name": "Acre -> M2", "value": "acre_to_m2" },
+                        { "name": "M2 -> Acre", "value": "m2_to_acre" }
+                    ]
+                },
+                {
+                    "name": "Volume", "value": "volume",
+                    "type": [
+                        { "name": "Gallon US -> Liter", "value": "gal(us)_to_l" },
+                        { "name": "Liter -> Gallon US", "value": "l_to_gal(us)" },
+                        { "name": "Gallon UK -> Liter", "value": "gal(uk)_to_l" },
+                        { "name": "Liter -> Gallon UK", "value": "l_to_gal(uk)" }
+                    ]
+                },
+                {
+                    "name": "Mass", "value": "mass",
+                    "type": [
+                        { "name": "Ounce -> Gram", "value": "oz_to_g" },
+                        { "name": "Gram -> Ounce", "value": "g_to_oz" },
+                        { "name": "Pound -> Kg", "value": "lb_to_kg" },
+                        { "name": "Kg -> Pound", "value": "kg_to_lb" }
+                    ]
+                },
+                {
+                    "name": "Velocity", "value": "velocity",
+                    "type": [
+                        { "name": "Km/h -> M/s", "value": "km/h_to_m/s" },
+                        { "name": "M/s -> Km/h", "value": "m/s_to_km/h" }
+                    ]
+                },
+                {
+                    "name": "Pressure", "value": "pressure",
+                    "type": [
+                        { "name": "Atm -> Pa",  "value": "atm_to_Pa" },
+                        { "name": "Pa -> Atm", "value": "Pa_to_atm" },
+                        { "name": "mmHg -> Pa", "value": "mmHg_to_Pa" },
+                        { "name": "Pa -> mmHg", "value": "Pa_to_mmHg" },
+                        { "name": "Kgf/cm2 -> Pa", "value": "kgf/cm2_to_Pa" },
+                        { "name": "Pa -> Kgf/cm2", "value": "Pa_to_kgf/cm2" },
+                        { "name": "Lbf/in2 -> kPa", "value": "lbf/in2_to_kPa" },
+                        { "name": "kPa -> Lbf/in2", "value": "kPa_to_lbf/in2" }
+                    ]
+                },
+                {
+                    "name": "Energy", "value": "energy",
+                    "type": [
+                        { "name": "Kgf-m -> J", "value": "kgf-m_to_J" },
+                        { "name": "J -> Kgf-m", "value": "J_to_kgf-m" },
+                        { "name": "J -> Cal",  "value": "J_to_cal" },
+                        { "name": "Cal -> J", "value": "cal_to_J" }
+                    ]
+                },
+                {
+                    "name": "Power", "value": "power",
+                    "type": [
+                        { "name": "Hp -> kW", "value": "hp_to_kW" },
+                        { "name": "kW -> Hp", "value": "kW_to_hp" }
+                    ]
+                },
+                {
+                    "name": "Temperature", "value": "temperature",
+                    "type": [
+                        { "name": "F -> C", "value": "F_to_C" },
+                        { "name": "C -> F", "value": "C_to_F" }
+                    ]
+                }
+            ]
+        },
+        "title": "Converter",
+        "fields": {
+            "categoryName": "Category:",
+            "typeName": "Unit conversion:",
+            "valueInput": "Value:",
+            "valueOutput": "Result:"
+        }
     }
+
 }
