@@ -38,13 +38,10 @@ await loadEvents(client);
 await loadCommands(client);
 
 //Database
-// await mongoose.connect(process.env.MONGO_DB);
-// infoLog("MongoDB has connected");
 connection.connect((err) => {
     if (err) errorLog(err);
-    else infoLog(`MySQL connected, using database ${connection.config.database}!`);
+    else infoLog(`MySQL connected, using database "${connection.config.database}"`);
 });
-
 
 //Bot Login 
 client.login(process.env.BOT_TOKEN);

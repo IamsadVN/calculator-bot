@@ -1,5 +1,8 @@
 import mysql2 from "mysql2";
+import { config } from "dotenv";
 import { debugLog, errorLog } from "../src/utils/log.js";
+
+config();
 
 const connection = mysql2.createConnection({
     host: process.env.MYSQL_HOST,
@@ -7,7 +10,7 @@ const connection = mysql2.createConnection({
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
     database: process.env.MYSQL_DB,
-
+    
     enableKeepAlive: true
 });
 
