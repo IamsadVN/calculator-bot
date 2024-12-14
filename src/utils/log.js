@@ -15,9 +15,13 @@ export function infoLog(valueInfo) {
 }
 
 export function warnLog(valueWarn) {
-    console.log(`${chalk.blue(getDateFull())} ${chalk.whiteBright(`[WARN]`)} ${warning(`${valueWarn}`)}`)
+    console.log(`${chalk.blue(getDateFull())} ${chalk.whiteBright(`[WARN]`)} ${warning(`${valueWarn}`)}`);
 }
 
 export function commandLog(userUseCommand,valueCommand,type) {
     console.log(`${chalk.blue(getDateFull())} ${chalk.whiteBright(`[CMD]`)} ${chalk.gray(`From: ${userUseCommand} | Command: ${valueCommand} | Type: ${type}`)}`);
+}
+
+export function debugLog(valueDebug) {
+    console.log(`${chalk.blue(getDateFull())} ${chalk.whiteBright(`[DEBUG]`)} ${warning(`${valueDebug}`)}`);
 }
