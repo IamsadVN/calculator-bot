@@ -1,5 +1,7 @@
 import chalk from "chalk";
+import { config } from "dotenv";
 const warning = chalk.hex('#FFA500'); // Orange color
+config();
 
 function getDateFull() {
     const date = new Date();
@@ -23,5 +25,6 @@ export function commandLog(userUseCommand,valueCommand,type) {
 }
 
 export function debugLog(valueDebug) {
+    if (process.env.DEBUG_LOG !== true) return;
     console.log(`${chalk.blue(getDateFull())} ${chalk.whiteBright(`[DEBUG]`)} ${warning(`${valueDebug}`)}`);
 }
