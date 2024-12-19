@@ -20,10 +20,10 @@ export default {
 
         if (langCode === undefined) {
             const serverLang = await new ServerSetting().getServerLang(message.guildId);
-
             await message.channel.send({
                 content: i18next.t("lang.currentLang",{lng: language, currentLang: serverLang})
             });
+            return;
         }
         else if (langCode.length > 2) {
             await message.channel.send({

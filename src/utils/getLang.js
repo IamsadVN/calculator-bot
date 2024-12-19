@@ -1,4 +1,4 @@
-import { ServerSetting, UserSetting } from "../../database/schema";
+import { ServerSetting, UserSetting } from "../../database/schema.js";
 
 export async function getLang(ctx) {
     if ("author" in ctx) {

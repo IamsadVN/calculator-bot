@@ -10,6 +10,7 @@ function getDateFull() {
 
 export function errorLog(valueErr){
     console.log(`${chalk.blue(getDateFull())} ${chalk.whiteBright(`[ERROR]`)} ${chalk.redBright(`Đã phát hiện lỗi: \n${valueErr}`)}`);
+    console.error(valueErr);
 }
 
 export function infoLog(valueInfo) {

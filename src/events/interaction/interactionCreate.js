@@ -24,8 +24,6 @@ export default {
             else {
                 commandLog(`User Install / ${interaction.user.tag}`,command.name,"Slash Command");
             }
-                
-            
         }
         else if (interaction.isAutocomplete()) 
             await command.autocomplete(interaction,i18next);

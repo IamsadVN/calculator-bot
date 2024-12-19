@@ -7,7 +7,6 @@ export default {
 
     async execute(client) {
         errorLog(client);
-        console.error(client);
 
         const webhook = new WebhookClient({
             url: process.env.WEBHOOK_ERROR

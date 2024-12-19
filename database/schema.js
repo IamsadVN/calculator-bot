@@ -4,27 +4,26 @@ import { debugLog, errorLog, infoLog } from "../src/utils/log.js";
 
 config();
 
-export async function connectDatabase() {
-    const connection = await mysql2.createConnection({
-        host: process.env.MYSQL_HOST,
-        port: process.env.MYSQL_PORT,
-        user: process.env.MYSQL_USER,
-        password: process.env.MYSQL_PASSWORD,
-        database: process.env.MYSQL_DB,
-        
-        enableKeepAlive: true
-    });
+const connection = await mysql2.createConnection({
+    host: process.env.MYSQL_HOST,
+    port: process.env.MYSQL_PORT,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    database: process.env.MYSQL_DB,
     
-    infoLog(`MySQL connected, using database ${connection.config.database}`);
-}
+    enableKeepAlive: true
+});
+
+infoLog(`MySQL connected, using database ${connection.config.database}`);
+
 
 export class UserSetting {
     async writeUserLang({username,userId,userlang}) {
-        const query = "INSERT INTO UserSetting (UserName,UserID,UserLang,CommandCount) VALUES (?,?,?,1) ON DUPLICATE KEY UPDATE UserName = ?, UserLang = ?";
+        const query = "INSERT INTO UserSetting (UserName,UserID,UserLang,CommandCount) VALUES (?,?,?,0) ON DUPLICATE KEY UPDATE UserName = ?, UserLang = ?";
         try {
             const [result] = await connection.execute(query,[username,userId,userlang,username,userlang]);
 
-            debugLog("The result obj in connection.query",result);
+            debugLog("The result obj in writeUserLang",result);
         }
         catch (err) {
             errorLog(err);
@@ -37,7 +36,15 @@ export class UserSetting {
 
             debugLog("Fields obj in connection.execute to get user lang",fields);
 
-            return result[0].UserLang;
+            if (result.length > 0) return result[0].UserLang;
+            else {
+                await this.writeUserLang({
+                    userId: userId,
+                    userlang: "vi",
+                    username: "missing_username"
+                });
+                return "vi";
+            }
         }
         catch (err) {
             errorLog(err);
@@ -87,7 +94,10 @@ export class ServerSetting {
         try {
             const [result] = await connection.execute(query,[serverId]);
 
-            return result[0].ServerLang;
+            debugLog("From getServerLang",result);
+
+            if (result.length > 0) return result[0].ServerLang;
+            else return "vi";
         } catch (err) {
             errorLog(err);
         }
