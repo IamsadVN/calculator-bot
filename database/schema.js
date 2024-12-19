@@ -1,27 +1,30 @@
 import mysql2 from "mysql2/promise";
 import { config } from "dotenv";
-import { debugLog, errorLog } from "../src/utils/log.js";
+import { debugLog, errorLog, infoLog } from "../src/utils/log.js";
 
 config();
 
-const connection = await mysql2.createConnection({
-    host: process.env.MYSQL_HOST,
-    port: process.env.MYSQL_PORT,
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASSWORD,
-    database: process.env.MYSQL_DB,
+export async function connectDatabase() {
+    const connection = await mysql2.createConnection({
+        host: process.env.MYSQL_HOST,
+        port: process.env.MYSQL_PORT,
+        user: process.env.MYSQL_USER,
+        password: process.env.MYSQL_PASSWORD,
+        database: process.env.MYSQL_DB,
+        
+        enableKeepAlive: true
+    });
     
-    enableKeepAlive: true
-});
+    infoLog(`MySQL connected, using database ${connection.config.database}`);
+}
 
 export class UserSetting {
     async writeUserLang({username,userId,userlang}) {
         const query = "INSERT INTO UserSetting (UserName,UserID,UserLang,CommandCount) VALUES (?,?,?,1) ON DUPLICATE KEY UPDATE UserName = ?, UserLang = ?";
         try {
-            const [result,fields] = await connection.execute(query,[username,userId,userlang,username,userlang]);
+            const [result] = await connection.execute(query,[username,userId,userlang,username,userlang]);
 
             debugLog("The result obj in connection.query",result);
-            debugLog("The fields obj in connection.query",fields);
         }
         catch (err) {
             errorLog(err);
@@ -43,9 +46,8 @@ export class UserSetting {
     async commandCount(userId) {
         const query = "UPDATE UserSetting SET CommandCount = CommandCount + 1 WHERE UserID = ?";
         try {
-            const [result,fields] = await connection.execute(query,[userId]);
-            debugLog("Look at the result if you need",result);
-            debugLog("Look at the fields if you need",fields);
+            const [result] = await connection.execute(query,[userId]);
+            debugLog("Result obj:",result);
         } catch (err) {
             errorLog(err);
         }
