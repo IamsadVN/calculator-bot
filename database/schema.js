@@ -1,10 +1,10 @@
-import mysql2 from "mysql2";
+import mysql2 from "mysql2/promise";
 import { config } from "dotenv";
 import { debugLog, errorLog } from "../src/utils/log.js";
 
 config();
 
-const connection = mysql2.createConnection({
+const connection = await mysql2.createConnection({
     host: process.env.MYSQL_HOST,
     port: process.env.MYSQL_PORT,
     user: process.env.MYSQL_USER,
@@ -15,38 +15,55 @@ const connection = mysql2.createConnection({
 });
 
 export class UserSetting {
-    writeUserLang({username,userId,userlang}) {
+    async writeUserLang({username,userId,userlang}) {
         const query = "INSERT INTO UserSetting (UserName,UserID,UserLang,CommandCount) VALUES (?,?,?,1) ON DUPLICATE KEY UPDATE UserName = ?, UserLang = ?";
+        try {
+            const [result,fields] = await connection.execute(query,[username,userId,userlang,username,userlang]);
 
-        connection.query(query,[username,userId,userlang,username,userlang],(err,result) => {
-            if (err) errorLog(err);
-            //else debugLog(result);
-        });
+            debugLog("The result obj in connection.query",result);
+            debugLog("The fields obj in connection.query",fields);
+        }
+        catch (err) {
+            errorLog(err);
+        }
     };
-    getUserLang(userId,callback) {
+    async getUserLang(userId) {
         const query = "SELECT * FROM UserSetting WHERE UserID = ?";
-        connection.query(query,[userId],(err,result) => {
-            if (err) {
-                //errorLog(err);
-                callback(err,null);
-            }
-            else {
-                //debugLog(result);
-                callback(null,result[0].UserLang);
-            }
-        });
-    };
-    commandCount(userId) {
-        const query = "UPDATE UserSetting SET CommandCount = CommandCount + 1 WHERE UserID = ?";
+        try {
+            const [result,fields] = await connection.execute(query,[userId]);
 
-        connection.query(query,[userId],(err,result) => {
-            if (err) errorLog(err);
-        });
+            debugLog("Fields obj in connection.execute to get user lang",fields);
+
+            return result[0].UserLang;
+        }
+        catch (err) {
+            errorLog(err);
+        }
+    };
+    async commandCount(userId) {
+        const query = "UPDATE UserSetting SET CommandCount = CommandCount + 1 WHERE UserID = ?";
+        try {
+            const [result,fields] = await connection.execute(query,[userId]);
+            debugLog("Look at the result if you need",result);
+            debugLog("Look at the fields if you need",fields);
+        } catch (err) {
+            errorLog(err);
+        }
     }
 };
 
 export class ServerSetting {
-    writeServerLang({
+    /**
+     * 
+     * @param {Object} param0 Uhhh idk
+     * @param {string} param0.servername Server name
+     * @param {string} param0.serverid Server ID
+     * @param {string} param0.serverlang Server Language
+     * @param {number} param0.servermembers Server Members
+     * @param {string} param0.serverowner Server Owner
+     * @param {string} param0.serverownerid Server Owner ID
+     */
+    async writeServerLang({
         servername,
         serverid,
         serverlang,
@@ -55,19 +72,23 @@ export class ServerSetting {
         serverownerid
     }) {
         const query = "INSERT INTO ServerSetting (ServerName,ServerID,ServerLang,ServerMembers,ServerOwner,ServerOwnerID) VALUES (?,?,?,?,?,?) ON DUPLICATE KEY UPDATE ServerName = ?, ServerLang = ?, ServerMembers = ?, ServerOwner = ?, ServerOwnerID = ?";
-        
-        connection.query(query,[servername,serverid,serverlang,servermembers,serverowner,serverownerid,servername,serverlang,servermembers,serverowner,serverownerid], (err,result) => {
-            if (err) errorLog(err);
-        });
+        try {
+            const [result] = await connection.execute(query,[servername,serverid,serverlang,servermembers,serverowner,serverownerid,servername,serverlang,servermembers,serverowner,serverownerid]);
+
+            debugLog("Result obj in writeServerLang",result);
+        } catch (err) {
+            errorLog(err);
+        }
     };
-    getServerLang(serverId,callback) {
+    async getServerLang(serverId) {
         const query = "SELECT * FROM ServerSetting WHERE ServerID = ?";
-        connection.query(query,[serverId],(err,result) => {
-            if (err) {
-                callback(err,null);
-            }
-            else callback(null,result[0].ServerLang);
-        })
+        try {
+            const [result] = await connection.execute(query,[serverId]);
+
+            return result[0].ServerLang;
+        } catch (err) {
+            errorLog(err);
+        }
     }
 }
 
