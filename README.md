@@ -28,6 +28,7 @@ Edit the values below:
 - `WEBHOOK_ERROR` = Webhook that send error to the Server
 - `WEBHOOK_GUILDJOIN` = Webhook that send embed about a guild the bot joined
 - `WEBHOOK_GUILDLEFT` = Webhook that send embed about a guild the bot left
+- `DEBUG_LOG` = Turn on or off debug log mode
 ## Step 4: Run the bot
 ```
 node .
