@@ -9,7 +9,7 @@ export default {
 
     async executeMessage(message, args, i18next) {
         const langCode = args[0];
-        const language = await getLang(message.guild.id)
+        const language = await getLang(message)
 
         let guildToChangeLang = await langOfEachGuild.findOne({
             guildID: message.guild.id
@@ -30,7 +30,7 @@ export default {
     async executeChatInput(interaction, i18next) {
         const langCode = interaction.options.getString("lang");
 
-        const language = await getLang(interaction.guildId)
+        const language = await getLang(interaction)
 
         await interaction.deferReply();
 
@@ -67,7 +67,7 @@ export default {
     },
 
     async autocomplete(interaction, i18next) {
-        const language = await getLang(interaction.guildId)
+        const language = await getLang(interaction)
         const focusValue = interaction.options.getFocused();
         const choices = i18next.t("lang.autocomplete.choices", { returnObjects: true, lng: language });
         const filtered = choices.filter(choice => choice.name.startsWith(focusValue));

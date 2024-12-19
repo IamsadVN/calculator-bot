@@ -7,7 +7,7 @@ export default {
 
     async executeMessage(message, args, i18next) {
         const number = Number(args[0]);
-        const language = await getLang(message.guild.id)
+        const language = await getLang(message)
 
         if (number > 9007199254740991) {
             return message.channel.send(i18next.t("fact.error.numberTooLarge",{lng: language}));
@@ -45,7 +45,7 @@ export default {
 
     async executeChatInput(interaction, i18next) {
         const number = interaction.options.getInteger("input");
-        const language = await getLang(interaction.guildId)
+        const language = await getLang(interaction)
 
         if (number > 9007199254740991) {
             await interaction.reply({

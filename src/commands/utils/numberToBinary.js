@@ -17,7 +17,7 @@ export default {
 
     async executeMessage(message,args,i18next) {
         const number = Number(args[0]);
-        const language = await getLang(message.guild.id);
+        const language = await getLang(message);
 
         if (!Number.isInteger(number)) 
             return message.channel.send(i18next.t("numberToBinary.error.isNotInteger",{lng:language}));
@@ -49,7 +49,7 @@ export default {
 
     async executeChatInput(interaction,i18next) {
         const number = interaction.options.getInteger("input");
-        const language = await getLang(interaction.guildId);
+        const language = await getLang(interaction);
         const embed = new EmbedBuilder()
             .setColor(Number(process.env.CALC))
             .setTitle(i18next.t("numberToBinary.title",{lng: language}))

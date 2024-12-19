@@ -7,7 +7,7 @@ export default {
     aliases: ["ran", "rand"],
 
     async executeMessage(message, args, i18next) {
-        const language = await getLang(message.guild.id);
+        const language = await getLang(message);
 
         await message.channel.send({
             content: i18next.t("random.error.onlySupportSlashCommand",{lng: language})
@@ -20,7 +20,7 @@ export default {
         const max = interaction.options.getNumber("max", true);
         const amount = interaction.options.getNumber("amount") || 1;
 
-        const language = await getLang(interaction.guildId);
+        const language = await getLang(interaction);
 
         if (min >= max) {
             return interaction.reply({
@@ -111,7 +111,7 @@ export default {
     },
 
     async autocomplete(interaction, i18next) {
-        const language = await getLang(interaction.guildId);
+        const language = await getLang(interaction);
 
         const focusValue = interaction.options.getFocused();
 

@@ -10,7 +10,7 @@ export default {
  
     
     async executeMessage(message,args,i18next) {
-        const language = await getLang(message.guild.id);
+        const language = await getLang(message);
         
         const numbers = [];
 
@@ -67,7 +67,7 @@ export default {
     },
     
     async executeChatInput(interaction,i18next) {
-        const language = await getLang(interaction.guildId);
+        const language = await getLang(interaction);
         
         const args = interaction.options.getString("numbers",true).split(",");
 

@@ -8,7 +8,7 @@ export default {
     description: "Tìm Ước Chung Lớn nhất của 2 số",
 
     async executeMessage(message,args,i18next) {
-        const language = await getLang(message.guild.id);
+        const language = await getLang(message);
         let numbers = [];
 
         if (args.length > 1) {
@@ -64,7 +64,7 @@ export default {
 
     async executeChatInput(interaction,i18next) {
         const args = interaction.options.getString("numbers",true).split(",");
-        const language = await getLang(interaction.guildId);
+        const language = await getLang(interaction);
 
         const numbers = [];
 

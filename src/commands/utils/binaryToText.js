@@ -12,7 +12,7 @@ export default {
 
     async executeMessage(message, args, i18next) {
         const binaryString = args.join(" ");
-        const language = await getLang(message.guild.id)
+        const language = await getLang(message)
 
         if (binaryString.search(/^[01\s]+/gm) === -1) {
             return message.channel.send({
@@ -46,7 +46,7 @@ export default {
 
     async executeChatInput(interaction, i18next) {
         const binaryString = interaction.options.getString("input");
-        const language = await getLang(interaction.guildId)
+        const language = await getLang(interaction)
 
         if (binaryString.search(/^[01\s]+/gm) === -1) {
             return interaction.reply({

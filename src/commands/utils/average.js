@@ -7,7 +7,7 @@ export default {
     description: "Tìm trung bình của nhiều số",
 
     async executeMessage(message,args,i18next) {
-        const language = await getLang(message.guild.id);
+        const language = await getLang(message);
         let numbers = [];
 
         //Nếu arr có length > 1 thì có nghĩa: "1 2 3 4 5 6"
@@ -56,7 +56,7 @@ export default {
     },
 
     async executeChatInput(interaction,i18next) {
-        const language = await getLang(interaction.guildId);
+        const language = await getLang(interaction);
 
         const input = interaction.options.getString("input",true);
         let numbers = [];

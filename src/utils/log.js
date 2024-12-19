@@ -24,6 +24,13 @@ export function commandLog(userUseCommand,valueCommand,type) {
     console.log(`${chalk.blue(getDateFull())} ${chalk.whiteBright(`[CMD]`)} ${chalk.gray(`From: ${userUseCommand} | Command: ${valueCommand} | Type: ${type}`)}`);
 }
 
+/**
+ * 
+ * @param {string} messageString String dung de noi ra cai van de can debug
+ * @param {object} valueDebug Gia tri can console.log ra de debug
+ * @returns {null}
+ */
+
 export function debugLog(messageString,valueDebug) {
     if (process.env.DEBUG_LOG !== "true") return;
     console.log(`${chalk.blue(getDateFull())} ${chalk.whiteBright(`[DEBUG]`)} ${warning(`${messageString}`)}`);

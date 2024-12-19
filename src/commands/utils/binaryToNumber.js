@@ -23,7 +23,7 @@ export default {
 
     async executeMessage(message,args,i18next) {
         const result = binToNum(args[0]);
-        const language = await getLang(message.guild.id);
+        const language = await getLang(message);
 
         if (result === "error") {
             await message.channel.send(i18next.t("binaryToNumber.error.invalidBinary",{lng: language}));
@@ -56,7 +56,7 @@ export default {
 
     async executeChatInput(interaction,i18next) {
         const result = binToNum(interaction.options.getString("input"));
-        const language = await getLang(interaction.guildId)
+        const language = await getLang(interaction)
 
         if (result === "error") {
             await interaction.reply({

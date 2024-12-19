@@ -8,7 +8,7 @@
     "start": "node .",
     "dev": "nodemon"
   },
-  "keywords": [],
+  "keywords": ["discord","discordbot","calculator","calculate"],
   "author": "",
   "license": "ISC",
   "dependencies": {

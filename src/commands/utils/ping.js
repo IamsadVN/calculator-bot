@@ -16,7 +16,7 @@ export default {
 
 
     async executeMessage(message,args,i18next) {
-        const language = await getLang(message.guild.id);
+        const language = await getLang(message);
 
         const embed = new EmbedBuilder()
             .setColor(Number(process.env.CALC))
@@ -48,7 +48,7 @@ export default {
     },
 
     async executeChatInput(interaction,i18next) {
-        const language = await getLang(interaction.guildId);
+        const language = await getLang(interaction);
 
         const embed = new EmbedBuilder()
             .setColor(Number(process.env.CALC))

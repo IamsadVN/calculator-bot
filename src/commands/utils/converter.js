@@ -9,7 +9,7 @@ export default {
     },
 
     async executeChatInput(interaction,i18next) {
-        const language = await getLang(interaction.guildId);
+        const language = await getLang(interaction);
         const categories = i18next.t("converter.autocomplete.categories",{lng:language,returnObjects:true});
 
         const categoryValue = interaction.options.getString("category",true);
@@ -82,7 +82,7 @@ export default {
         )
     },
     async autocomplete(interaction,i18next) {
-        const language = await getLang(interaction.guildId);
+        const language = await getLang(interaction);
         const focusedOption = interaction.options.getFocused(true);
 
         const categoriesChoices = i18next.t("converter.autocomplete.categories",{lng:language,returnObjects:true});

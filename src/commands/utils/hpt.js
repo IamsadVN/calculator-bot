@@ -12,7 +12,7 @@ export default {
         const [equation2, c2] = args[1].split("=");
         const valEquation1 = getValueOfEquation(equation1);
         const valEquation2 = getValueOfEquation(equation2);
-        const language = await getLang(message.guild.id);
+        const language = await getLang(message);
 
         if (valEquation1 === "error" || valEquation2 === "error") {
             await message.channel.send(i18next.t("hpt.error.wrongEquation",{lng: language}));
@@ -71,7 +71,7 @@ export default {
         const valEquation1 = getValueOfEquation(equation1);
         const valEquation2 = getValueOfEquation(equation2);
 
-        const language = await getLang(interaction.guildId)
+        const language = await getLang(interaction)
 
         if (valEquation1 === "error" || valEquation2 === "error") {
             return interaction.reply({
