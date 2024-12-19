@@ -1,3 +1,4 @@
+import { UserSetting } from "../../../database/schema.js";
 import { commandLog } from "../../utils/log.js";
 import i18next from "i18next";
 
@@ -10,15 +11,20 @@ export default {
                 data.name === interaction.commandName
             ))
         );
-        
-        //console.log(interaction.inCachedGuild());
 
         if (interaction.isChatInputCommand()) {
             if (!command) return;
             await command.executeChatInput?.(interaction,i18next);
 
-            if (interaction.inCachedGuild()) commandLog(`${interaction.guild} / ${interaction.user.tag}`,command.name,"Slash Command");
-            else commandLog(`User Install / ${interaction.user.tag}`,command.name,"Slash Command");
+            await new UserSetting().commandCount(interaction.user.id);
+
+            if (interaction.inCachedGuild()) {
+                commandLog(`${interaction.guild} / ${interaction.user.tag}`,command.name,"Slash Command");
+            }
+            else {
+                commandLog(`User Install / ${interaction.user.tag}`,command.name,"Slash Command");
+            }
+                
             
         }
         else if (interaction.isAutocomplete()) 

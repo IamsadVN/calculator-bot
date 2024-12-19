@@ -1,3 +1,4 @@
+import { UserSetting } from "../../../database/schema.js";
 import { commandLog } from "../../utils/log.js";
 import i18next from "i18next";
 
@@ -24,8 +25,11 @@ export default {
 
         if (!command) return;
         
+
         await command.executeMessage?.(message,args,i18next);
         
+        await new UserSetting().commandCount(message.author.id);
+
         commandLog(`${message.guild} / ${message.author.username}`,command.name,"Prefix");
     }
 }
