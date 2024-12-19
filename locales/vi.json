@@ -27,7 +27,11 @@
                 }
             ]
         },
-        "changedLang": "Đã thay đổi ngôn ngữ sang `{{language}}` thành công!"
+        "changedLang": "Đã thay đổi ngôn ngữ sang `{{language}}` thành công!",
+        "currentLang": "Ngôn ngữ hiện tại hiện đang là `{{currentLang}}`",
+        "error": {
+            "isNotLangCode": "Có vẻ như bạn đã nhập sai mã ngôn ngữ, vui lòng hãy nhập lại!"
+        }
     },
 
     "fact": {

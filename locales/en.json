@@ -27,7 +27,11 @@
                 }
             ]
         },
-        "changedLang": "Language changed to `{{language}}` successfully!"
+        "changedLang": "Successfully changed the language to `{{language}}`!",
+        "currentLang": "The current language is `{{currentLang}}`",
+        "error": {
+            "isNotLangCode": "It seems you entered an incorrect language code, please try again!"
+        }
     },
 
     "fact": {
