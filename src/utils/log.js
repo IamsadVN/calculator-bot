@@ -24,7 +24,8 @@ export function commandLog(userUseCommand,valueCommand,type) {
     console.log(`${chalk.blue(getDateFull())} ${chalk.whiteBright(`[CMD]`)} ${chalk.gray(`From: ${userUseCommand} | Command: ${valueCommand} | Type: ${type}`)}`);
 }
 
-export function debugLog(valueDebug) {
+export function debugLog(messageString,valueDebug) {
     if (process.env.DEBUG_LOG !== "true") return;
-    console.log(`${chalk.blue(getDateFull())} ${chalk.whiteBright(`[DEBUG]`)} ${warning(`${valueDebug}`)}`);
+    console.log(`${chalk.blue(getDateFull())} ${chalk.whiteBright(`[DEBUG]`)} ${warning(`${messageString}`)}`);
+    if (valueDebug) console.log(valueDebug);
 }
