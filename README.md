@@ -6,7 +6,7 @@ A project to perform calculations on the Discord platform, running on NodeJS wit
 
 # Request
 - NodeJS > 20
-- MongoDB
+- MySQL 
 
 # Installation
 ## Step 1: Clone this repository
