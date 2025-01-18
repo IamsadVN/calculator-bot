@@ -8,17 +8,21 @@
     "start": "node .",
     "dev": "nodemon"
   },
-  "keywords": ["discord","discordbot","calculator","calculate"],
+  "keywords": [
+    "discord",
+    "discordbot",
+    "calculator",
+    "calculate"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "chalk": "^5.3.0",
-    "discord.js": "^14.16.3",
+    "discord.js": "^14.17.3",
     "dotenv": "^16.3.1",
     "i18next": "^23.16.2",
     "i18next-fs-backend": "^2.3.2",
     "mathjs": "^13.0.1",
-    "mongoose": "^8.4.3",
     "mysql2": "^3.11.3"
   }
 }
