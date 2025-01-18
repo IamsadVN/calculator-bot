@@ -2,7 +2,6 @@ import { config } from "dotenv";
 import { Client, GatewayIntentBits, Collection } from "discord.js";
 import { loadEvents, loadCommands } from "./utils/loader.js";
 import { errorLog, infoLog, warnLog } from "./utils/log.js"
-import connection from "../database/schema.js";
 import i18next from "i18next";
 import Backend from "i18next-fs-backend";
 
