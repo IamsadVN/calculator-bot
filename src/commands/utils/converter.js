@@ -81,7 +81,7 @@ export default {
             )
         )
     },
-    async autocomplete(interaction,i18next) {
+    async executeAutocomplete(interaction,i18next) {
         const language = await getLang(interaction);
         const focusedOption = interaction.options.getFocused(true);
 

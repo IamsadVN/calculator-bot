@@ -26,6 +26,6 @@ export default {
             }
         }
         else if (interaction.isAutocomplete()) 
-            await command.autocomplete(interaction,i18next);
+            await command.executeAutocomplete(interaction,i18next);
     }
 }

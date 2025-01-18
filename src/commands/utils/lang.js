@@ -91,7 +91,7 @@ export default {
         );
     },
 
-    async autocomplete(interaction, i18next) {
+    async executeAutocomplete(interaction, i18next) {
         const language = await getLang(interaction)
         const focusValue = interaction.options.getFocused();
         const choices = i18next.t("lang.autocomplete.choices", { returnObjects: true, lng: language });
