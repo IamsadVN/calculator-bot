@@ -1,9 +1,9 @@
 DROP DATABASE IF EXISTS discord;
 CREATE DATABASE IF NOT EXISTS discord;
 
-USE "discord";
+USE discord;
 
-DROP TABLE IF EXISTS "UserSetting";
+DROP TABLE IF EXISTS UserSetting;
 
 CREATE TABLE UserSetting(
     id INT NOT NULL AUTO_INCREMENT,
@@ -16,7 +16,7 @@ CREATE TABLE UserSetting(
     UNIQUE (UserID)
 );
 
-DROP TABLE IF EXISTS "ServerSetting";
+DROP TABLE IF EXISTS ServerSetting;
 
 CREATE TABLE ServerSetting(
     id INT NOT NULL AUTO_INCREMENT,
